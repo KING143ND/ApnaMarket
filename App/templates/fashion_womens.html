@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% for m in womens %}
+{% block title %}Womens Fashion {% endblock title %}
+{% endfor %}
+{% block main-content %}
+<div class="container my-5">
+ <div class="row">
+  <div class="col-md-2 fixed">
+   <div class="list-group">
+    <a href="/fashion/womens" class="list-group-item list-group-item-action">All Womens Fashion</a>
+    <a href="/fashion/womens/filter=T-Shirts" class="list-group-item list-group-item-action">T-Shirts</a>
+    <a href="/fashion/womens/filter=Sarees" class="list-group-item list-group-item-action">Sarees</a>
+    <a href="/fashion/womens/filter=Winter_Wears" class="list-group-item list-group-item-action">Winter_Wears</a>
+    <a href="/fashion/womens/filter=Tops" class="list-group-item list-group-item-action">Tops</a>
+    <a href="/fashion/womens/filter=Kurtas" class="list-group-item list-group-item-action">Kurtas</a>
+    <a href="/fashion/womens/filter=Jeans" class="list-group-item list-group-item-action">Jeans</a>
+    <a href="/fashion/womens/filter=Trousers" class="list-group-item list-group-item-action">Trousers</a>
+    <a href="/fashion/womens/filter=Trackpants" class="list-group-item list-group-item-action">Trackpants</a>
+    <a href="/fashion/womens/filter=Shoes" class="list-group-item list-group-item-action">Shoes</a>
+    <a href="/fashion/womens/filter=Slippers" class="list-group-item list-group-item-action">Slippers</a>
+    <a href="/fashion/womens/filter=Purse" class="list-group-item list-group-item-action">Purse</a>
+    <a href="/fashion/womens/filter=Watches" class="list-group-item list-group-item-action">Watches</a>
+    <a href="/fashion/womens/filter=Sunglasses" class="list-group-item list-group-item-action">Sunglasses</a>
+    <a href="/fashion/womens/filter=Belts" class="list-group-item list-group-item-action">Belts</a>
+    <a href="/fashion/womens/filter=Jewellery" class="list-group-item list-group-item-action">Jewellery</a>
+    <a href="/fashion/womens/filter=low_to_high" class="list-group-item list-group-item-action">Price:Low to High</a>
+    <a href="/fashion/womens/filter=high_to_low" class="list-group-item list-group-item-action">Price:High to Low</a>
+    <a href="/fashion/womens/filter=below_100" class="list-group-item list-group-item-action">Below 100</a>
+    <a href="/fashion/womens/filter=below_200" class="list-group-item list-group-item-action">Below 200</a>
+    <a href="/fashion/womens/filter=below_500" class="list-group-item list-group-item-action">Below 500</a>
+    <a href="/fashion/womens/filter=below_1000" class="list-group-item list-group-item-action">Below 1000</a>
+    <a href="/fashion/womens/filter=below_2000" class="list-group-item list-group-item-action">Below 2000</a>
+    <a href="/fashion/womens/filter=above_2000" class="list-group-item list-group-item-action">Above 2000</a>
+    <a href="/fashion/womens/filter=customer_rating" class="list-group-item list-group-item-action">Customer Rating</a>
+    <a href="/fashion/womens/filter=customer_review" class="list-group-item list-group-item-action">Customer Reviews</a>
+   </div>
+  </div>
+    <div class="col-md-10">
+        <div class="row" >
+        {% for m in womens %}
+        <div class='col-md-4 text-center mb-4'>
+            <a href="/product-detail/{{m.title}}" class='btn'>
+                <div class="item">
+                    <div style="height: 180px; width: 180px; position: relative;
+                    margin: 0 auto;">
+                        <img src="{{m.product_image.url}}" alt="" class="p-img">
+                    </div>
+                    <div class="product-desc">
+                        <span class="product-title">{{m.title}}</span>
+                        <span class="badge bg-success">{{m.rating}}<i class="ri-star-fill"></i></span>
+                        <span class="product-review">{{m.review}}</span>
+                    </div>
+                    <div class="fw-bold">₹{{m.discounted_price}} <small class='fw-light text-decoration-line-through'>₹{{m.selling_price}}</small></div>
+                </div>
+            </a>
+        </div>
+            {% endfor %}
+        </div>
+    </div>
+ </div>
+</div>
+{% endblock main-content %}

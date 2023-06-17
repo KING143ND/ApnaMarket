@@ -1,0 +1,240 @@
+{% extends 'base.html' %} {% load static %} {% block title %}ApnaMarket{% endblock title %} {% block banner_slider %}
+<!--Banner Slider-->
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <a href="/fashion/womens">
+                <img src="{% static 'images/banner/fashion.jpg' %}" class="d-block w-100" alt="...">
+            </a>
+        </div>
+        <div class="carousel-item ">
+            <a href="/grocery">
+                <img src="{% static 'images/banner/grocery.jpg' %}" class="d-block w-100" alt="...">
+            </a>
+        </div>
+        <div class="carousel-item ">
+            <a href="/mobile">
+                <img src="{% static 'images/banner/mobile.jpg' %}" class="d-block w-100" alt="...">
+            </a>
+        </div>
+        <div class="carousel-item ">
+            <a href="/electricappliances">
+                <img src="{% static 'images/banner/electronics.jpg' %}" class="d-block w-100" alt="...">
+            </a>
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </a>
+</div>
+<!-- End Banner Slider -->
+{% endblock banner_slider %} {% block livesale %}
+<!-- Live Sale Section -->
+<div class="container">
+    <div class="row my-2 bg-danger text-center p-5 text-white border-bottom shadow">
+        <h1>SALE IS LIVE NOW</h1>
+        <span>5% Instant Discount on Axis Bank Credit and Debit Card</span>
+        <small class="fw-lighter">Term and Condition Applied (For details visit Bank's official Website)</small>
+    </div>
+</div>
+<!-- End Live Sale Section -->
+{% endblock livesale %} {% block main-content %}
+<!-- 1st Product Slider -->
+<div class="m-3">
+    <h2 class="text-center mt-5">Deals of The Day</h2>
+    <!-- Slider 1 -->
+    <div class="owl-carousel" id="slider1">
+        {% for p in products %}
+        <div class="home-slide-row">
+            <div class="home-product-img">
+                <a href="/product-detail/{{p.title}}" class="btn prod-con">
+                    <div class='img-main' style="height: 180px; width: 180px; position: relative;
+                    margin: 0 auto;">
+                        <img src="{{p.product_image.url}}" class="p-img" alt='' /></div>
+                    <div class="product-desc">
+                        <span class="product-title">{{p.title}}</span>
+                        <span class="badge bg-success">{{p.rating}} &#9733;</span>
+                        <span class="product-review">{{p.review}}</span>
+                    </div>
+                    <div class="product-desc2">
+                        <span class="product-price">₹{{p.discounted_price}}</span>
+                        <span class="product-price2">₹{{p.selling_price}}</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<!-- End 1st Product Slider -->
+
+<!-- Payment Info Section -->
+<div class="container my-5">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <img src="{% static 'images/payavail/cc.jpg' %}" alt="" srcset="" class="img-fluid">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <img src="{% static 'images/payavail/upi.jpg' %}" alt="" srcset="" class="img-fluid">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <img src="{% static 'images/payavail/nb.jpg' %}" alt="" srcset="" class="img-fluid">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <img src="{% static 'images/payavail/bj.jpg' %}" alt="" srcset="" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Payment Info Section -->
+
+<!-- 2nd Product Slider -->
+<div class="m-3">
+    <h2 class="text-center mt-5">Top Deals on Mobiles</h2>
+    <!-- Slider 1 -->
+    <div class="owl-carousel" id="slider2">
+        {% for p in mobiles %}
+        <div class="home-slide-row">
+            <div class="home-product-img">
+                <a href="/product-detail/{{p.title}}" class="btn prod-con">
+                    <div class='img-main' style="height: 180px; width: 180px; position: relative;
+                    margin: 0 auto;">
+                        <img src="{{p.product_image.url}}" class="p-img" alt='' /></div>
+                    <div class="product-desc">
+                        <span class="product-title">{{p.title}}</span>
+                        <span class="badge bg-success">{{p.rating}} &#9733;</span>
+                        <span class="product-review">{{p.review}}</span>
+                    </div>
+                    <div class="product-desc2">
+                        <span class="product-price">₹{{p.discounted_price}}</span>
+                        <span class="product-price2">₹{{p.selling_price}}</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<div class="m-3">
+    <h2 class="text-center mt-5">Deals on Fashion</h2>
+    <!-- Slider 1 -->
+    <div class="owl-carousel" id="slider3">
+        {% for p in fashion %}
+        <div class="home-slide-row">
+            <div class="home-product-img">
+                <a href="/product-detail/{{p.title}}" class="btn prod-con">
+                    <div class='img-main' style="height: 180px; width: 180px; position: relative;
+                    margin: 0 auto;">
+                        <img src="{{p.product_image.url}}" class="p-img" alt='' /></div>
+                    <div class="product-desc">
+                        <span class="product-title">{{p.title}}</span>
+                        <span class="badge bg-success">{{p.rating}} &#9733;</span>
+                        <span class="product-review">{{p.review}}</span>
+                    </div>
+                    <div class="product-desc2">
+                        <span class="product-price">₹{{p.discounted_price}}</span>
+                        <span class="product-price2">₹{{p.selling_price}}</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<div class="m-3">
+    <h2 class="text-center mt-5">Best in Electronics</h2>
+    <!-- Slider 1 -->
+    <div class="owl-carousel" id="slider4">
+        {% for p in electronics %}
+        <div class="home-slide-row">
+            <div class="home-product-img">
+                <a href="/product-detail/{{p.title}}" class="btn prod-con">
+                    <div class='img-main' style="height: 180px; width: 180px; position: relative;
+                    margin: 0 auto;">
+                        <img src="{{p.product_image.url}}" class="p-img" alt='' /></div>
+                    <div class="product-desc">
+                        <span class="product-title">{{p.title}}</span>
+                        <span class="badge bg-success">{{p.rating}} &#9733;</span>
+                        <span class="product-review">{{p.review}}</span>
+                    </div>
+                    <div class="product-desc2">
+                        <span class="product-price">₹{{p.discounted_price}}</span>
+                        <span class="product-price2">₹{{p.selling_price}}</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<div class="m-3">
+    <h2 class="text-center mt-5">Deals on Grocery</h2>
+    <div class="owl-carousel" id="slider4">
+        {% for p in grocery %}
+        <div class="home-slide-row">
+            <div class="home-product-img">
+                <a href="/product-detail/{{p.title}}" class="btn prod-con">
+                    <div class='img-main' style="height: 180px; width: 180px; position: relative;
+                    margin: 0 auto;">
+                        <img src="{{p.product_image.url}}" class="p-img" alt='' /></div>
+                    <div class="product-desc">
+                        <span class="product-title">{{p.title}}</span>
+                        <span class="badge bg-success">{{p.rating}} &#9733;</span>
+                        <span class="product-review">{{p.review}}</span>
+                    </div>
+                    <div class="product-desc2">
+                        <span class="product-price">₹{{p.discounted_price}}</span>
+                        <span class="product-price2">₹{{p.selling_price}}</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<div class="m-3">
+    <h2 class="text-center mt-5">Deals on Home Appliances</h2>
+    <div class="owl-carousel" id="slider4">
+        {% for p in home %}
+        <div class="home-slide-row">
+            <div class="home-product-img">
+                <a href="/product-detail/{{p.title}}" class="btn prod-con">
+                    <div class='img-main' style="height: 180px; width: 180px; position: relative;
+                    margin: 0 auto;">
+                        <img src="{{p.product_image.url}}" class="p-img" alt='' /></div>
+                    <div class="product-desc">
+                        <span class="product-title">{{p.title}}</span>
+                        <span class="badge bg-success">{{p.rating}} &#9733;</span>
+                        <span class="product-review">{{p.review}}</span>
+                    </div>
+                    <div class="product-desc2">
+                        <span class="product-price">₹{{p.discounted_price}}</span>
+                        <span class="product-price2">₹{{p.selling_price}}</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock main-content %}

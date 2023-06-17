@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Contact Us{% endblock title %}
+{% block main-content %}
+
+<div class="container" >
+ <div class="row my-3">
+  <div class="col-md-6 offset-md-3">
+   <h3>Contact Us</h3>
+   <hr>
+   <form action="/contact/" method="post" novalidate class="my_form2 shadow p-5 row">
+    {% csrf_token %}
+  <div class="mb-3 col-6">
+   <h5 for="firstName" class="form-label">First Name</h5>
+   <input type="text" class="form-control"  id="firstName" name="firstName" placeholder="Enter your first name">
+  </div>
+  <div class="mb-3 col-6">
+   <h5 for="lastName" class="form-label">Last Name</h5>
+   <input type="text" class="form-control"  id="lastName" name="lastName" placeholder="Enter your last name">
+  </div>
+  <div class="mb-3">
+   <h5 for="email" class="form-label">Email</h5>
+   <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+   <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+  </div>
+  <div class="mb-3">
+   <h5 for="massage" class="form-label">Message</h5>
+   <textarea type="password" class="form-control" id="massage" name="massage" cols="15" rows="5" placeholder="Enter your message here...."></textarea>
+  </div>
+  <div class="text-end">
+   <button type="submit" class="btn btn-danger">Submit</button>
+  </div>
+ </form>
+  </div>
+ </div>
+</div>
+{% endblock main-content %}

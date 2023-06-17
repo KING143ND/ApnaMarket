@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Login{% endblock title %}
+{% block main-content %}
+
+<div class="container" >
+ <div class="row my-3">
+  <div class="col-md-6 offset-md-3">
+   <h3>Login</h3>
+   <hr>
+   <form action="/login/" method="post" novalidate class="my_form4 shadow p-5">
+    {% csrf_token %}
+    <div class="mb-3">
+     <h5 for="loginusername" class="form-label">Username</h5>
+     <input type="text" class="form-control" id="loginusername" name="loginusername" aria-describedby="UsernameHelp">
+    </div>
+    <div class="mb-3">
+     <h5 for="loginpassword" class="form-label">Password</h5>
+     <input type="password" class="form-control" id="loginpassword" name="loginpassword">
+     <i class="ri-eye-fill" id="togglePassword" onclick="loginpassword()"></i>
+    </div>
+    <small><a class="text-center text-dark" href="#">Forgot Password ?</a></small> <br>
+    <input type="submit" class="btn btn-danger px-3 mt-4" value="Login">
+    <br>
+    <div class="text-center text-dark fs-6"><small>New to ApnaMarket ? <a class="text-center text-danger" href="/registration"
+       >Create an Account</a> </small></div>
+   </form>
+  </div>
+ </div>
+</div>
+{% endblock main-content %}

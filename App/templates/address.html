@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Buy Now{% endblock title %}
+{% block main-content %}
+
+<div class="container my-5">
+ <div class="row">
+ <h3>Welcome {{request.user}}</h3>
+  <div class="col-lg-2 border-end">
+   <ul class="list-unstyled">
+    <li class="d-grid"><a href="/profile" class="btn">Profile</a></li>
+    <li class="d-grid"><a href="/address" class="btn btn-primary">Address</a></li>
+   </ul>
+  </div>
+  <div class="col-lg-9 offset-lg-1">
+   <div class="row">
+    {% if profile|length == 0  %}
+<div class="col-lg-6 text-center">
+  <h1 class="text-center">No Address Added</h1>
+  </div>
+{% endif %}
+       {% for p in profile %}
+    <div class="col-md-6 my-2">
+        <div class="card my_form">
+            <div class="card-body py-4">
+             <h3>Address {{forloop.counter}}</h3>
+             <p>Name: {{p.name}}</p>
+             <p>Address: {{p.locality}}</p>
+             <p>City: {{p.city}}</p>
+             <p>State: {{p.state}}</p>
+             <p>Pincode: {{p.zipcode}}</p>
+             <p>Email: {{p.email}}</p>
+             <p>Mobile Number: {{p.phone}}</p>
+             <p>Gender: {{p.gender}}</p>
+             <a href="/address/remove/{{p.id}}" class="btn btn-danger mr-3 px-4">Delete</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %} 
+   </div>
+  </div>
+ </div>
+</div>
+
+{% endblock main-content %}

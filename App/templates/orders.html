@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Buy Now{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+ <div class="row">
+ <h3>Welcome {{request.user}}</h3>
+  <div class="col-md-2 border-end">
+   <ul class="list-unstyled">
+    <li class="d-grid"><a href="/orders" class="btn btn-primary">Orders</a></li>
+   </ul>
+  </div>
+  <div class="col-md-9 offset-md-1">
+    {% for p in op %}
+    <div class="row shadow-md mb-3">
+        <a href="/product-detail/{{p.product.title}}" class="col-md-3 text-center align-self-center"><img src="{{p.product.product_image.url}}" alt="" srcset="" class="img-fluid" height="150" width="150"> </a>
+     <div class="col-md-6">
+      <div class="">
+        <div>
+          <a class="heading" href="/product-detail/{{p.product.title}}"><h5 class="mt-2">{{p.product.title}}</h5></a>                              
+          <div class="my-2 fs-6">
+              <label class="text-primary">Product Price: </label>
+              <span class="my-2 mx-2">₹{{p.product.discounted_price}}</span>
+              <br>
+              <label class="text-primary">Description: </label>
+              {% if p.product.description|length > 125 %}
+              <span class="mb-2 small">{{p.product.description|slice:"0:125"}}...</span>
+              {% else  %}
+              <span class="mb-2 small">{{p.product.description}}</span>
+              {% endif %}
+              <br>
+              <label class="text-primary">Ratings & Reviews: </label>
+              <span class="badge bg-success small my-2">{{p.product.rating}} &#9733;</span>
+              <span class="small">{{p.product.review}} Reviews</span>
+          </div>
+      </div>
+        {% if p.status == 'Accepted' %}
+        <div class="progress my-2" role="progressbar" aria-label="Animated striped example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+          <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" style="width: 25%">{{p.status}}</div>
+        </div>
+        {% elif p.status == 'Packed' %}
+        <div class="progress my-2" role="progressbar" aria-label="Animated striped example" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+          <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" style="width: 50%">{{p.status}}</div>
+        </div>
+        {% elif p.status == 'On The Way' %}
+        <div class="progress my-2" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+          <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width: 75%">{{p.status}}</div>
+        </div>
+        {% elif p.status == 'Pending' %}
+        <div class="progress my-2" role="progressbar" aria-label="Animated striped example " aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+          <div class="progress-bar progress-bar-striped progress-bar-animated bg-secondary" style="width: 100%">{{p.status}}</div>
+        </div>
+        {% elif p.status == 'Cancel' %}
+        <div class="progress my-2" role="progressbar" aria-label="Animated striped example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+          <div class="progress-bar progress-bar-striped progress-bar-animated bg-dark" style="width: 100%">{{p.status}}</div>
+        </div>
+        {% else %}
+        <div class="progress my-2" role="progressbar" aria-label="Animated striped example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+          <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 100%">{{p.status}}</div>
+        </div>
+        {% endif %}
+        <br>
+      </div>
+     </div>
+    </div>
+    {% endfor %}
+  </div>
+ </div>
+</div>
+{% endblock main-content %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Customer Registration{% endblock title %}
+{% block main-content %}
+
+<div class="container">
+ <div class="row my-3">
+  <div class="col-md-6 offset-md-3">
+   <h3>Customer Registration</h3>
+   <hr>
+
+   <form action="/registration/" method="post" novalidate class="my_form3 shadow p-5">
+      {% csrf_token %}
+    <div class="mb-3">
+     <h5 for="username" class="form-label">Username</h5>
+     <input type="text" class="form-control"  id="username" name="username" placeholder="Choose a unique username">
+    </div>
+    <div class="mb-3">
+     <h5 for="email" class="form-label">Email</h5>
+     <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+     <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    </div>
+    <div class="mb-3">
+     <h5 for="pass1" class="form-label">Password</h5>
+     <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Choose Your Password">
+     <i class="ri-eye-fill" id="togglePassword" onclick="pass1()"></i>
+    </div>
+    <div class="mb-3">
+     <h5 for="pass2" class="form-label">Confirm Password</h5>
+     <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Enter your password again">
+     <i class="ri-eye-fill" id="togglePassword" onclick="pass2()"></i>
+    </div>
+    <div class="text-end">
+     <button type="submit" class="btn btn-danger">Submit</button>
+    </div>
+    <br>
+    <div class="text-center text-dark fs-6"><small>Existing User ? <a href="/login"
+       class="text-green">Login Now</a> </small></div>
+   </form>
+  </div>
+ </div>
+</div>
+{% endblock main-content %}

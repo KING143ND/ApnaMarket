@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home Appliances{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+ <div class="row">
+  <div class="col-md-2 fixed">
+   <div class="list-group">
+    <a href="/homeappliances" class="list-group-item list-group-item-action">All Home Appliances</a>
+    <a href="/homeappliances/filter=Home_Decor" class="list-group-item list-group-item-action">Home Decor</a>
+    <a href="/homeappliances/filter=Furniture" class="list-group-item list-group-item-action">Furniture</a>
+    <a href="/homeappliances/filter=Lightings" class="list-group-item list-group-item-action">Lightings</a>
+    <a href="/homeappliances/filter=Tools" class="list-group-item list-group-item-action">Tools</a>
+    <a href="/homeappliances/filter=low_to_high" class="list-group-item list-group-item-action">Price:Low to High</a>
+    <a href="/homeappliances/filter=high_to_low" class="list-group-item list-group-item-action">Price:High to Low</a>
+    <a href="/homeappliances/filter=below_100" class="list-group-item list-group-item-action">Below 100</a>
+    <a href="/homeappliances/filter=below_200" class="list-group-item list-group-item-action">Below 200</a>
+    <a href="/homeappliances/filter=below_500" class="list-group-item list-group-item-action">Below 500</a>
+    <a href="/homeappliances/filter=below_1000" class="list-group-item list-group-item-action">Below 1000</a>
+    <a href="/homeappliances/filter=below_2000" class="list-group-item list-group-item-action">Below 2000</a>
+    <a href="/homeappliances/filter=above_2000" class="list-group-item list-group-item-action">Above 2000</a>
+    <a href="/homeappliances/filter=customer_rating" class="list-group-item list-group-item-action">Customer Rating</a>
+    <a href="/homeappliances/filter=customer_review" class="list-group-item list-group-item-action">Customer Reviews</a>
+   </div>
+  </div>
+    <div class="col-md-10">
+        <div class="row" >
+        {% for m in home %}
+        <div class='col-md-4 text-center mb-4'>
+            <a href="/product-detail/{{m.title}}" class='btn'>
+                <div class="item">
+                    <div style="height: 180px; width: 180px; position: relative;
+                    margin: 0 auto;">
+                        <img src="{{m.product_image.url}}" alt="" class="p-img">
+                    </div>
+                    <div class="product-desc">
+                        <span class="product-title">{{m.title}}</span>
+                        <span class="badge bg-success">{{m.rating}}<i class="ri-star-fill"></i></span>
+                        <span class="product-review">{{m.review}}</span>
+                    </div>
+                    <div class="fw-bold">₹{{m.discounted_price}} <small class='fw-light text-decoration-line-through'>₹{{m.selling_price}}</small></div>
+                </div>
+            </a>
+        </div>
+            {% endfor %}
+        </div>
+    </div>
+ </div>
+</div>
+{% endblock main-content %}

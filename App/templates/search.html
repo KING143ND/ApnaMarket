@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Search Results{% endblock title %}
+{% block main-content %}
+<div class="container my-3">
+    <div class="row">
+        {% if search_prod|length == 0 %}
+        <h1 class="text-center mb-12">No Search results found for "{{query}}"</h1>
+        {% else %}
+        <h1 class="text-center mb-3">Here is your all Search results</h1>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h3>Showing {{search_prod|length}} results found for "{{query}}"</h3>
+                    {% for p in search_prod %}
+                    <div class="row"><hr>
+                        <a href="/product-detail/{{p.title}}" class="col-md-3 text-center align-self-center"><div style="height: 180px; width: 180px; position: relative;
+                        margin: 0 auto;"><img src="{{p.product_image.url}}" alt="" class="img-fluid p-img"></div></a>
+                        <div class="col-md-9">
+                            <div>
+                                <a class="heading" href="/product-detail/{{p.title}}"><h5>{{p.title}}</h5></a>                              
+                                <div class="my-2">
+                                    <label class="text-primary">Description: </label>
+                                    {% if p.description|length > 250 %}
+                                    <span class="mb-2 small">{{p.description|slice:"0:250"}}...</span>
+                                    {% else  %}
+                                    <span class="mb-2 small">{{p.description}}</span>
+                                    {% endif %}
+                                    <br>
+                                    <label class="text-primary">Brand: </label>
+                                    <span class="small mb-2"> {{p.brand}}</span>
+                                    <br>
+                                    <label class="text-primary">Ratings & Reviews: </label>
+                                    <span class="badge bg-success small my-2 "> {{p.rating}} &#9733;</i></span>
+                                    <span class="small">{{p.review}} Reviews</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <form action="/add-to-cart/{{p.id}}" class='d-inline'>
+                                        <input type="hidden" name='prod_id' value={{p.id}} id='prod_id'>
+                                        <button type="submit" class="btn btn-md btn-primary mr-">Add to Cart</button>
+                                    </form>
+                                    <p class="mb-0"><span class="cart-price">₹{{p.discounted_price}}</span>
+                                    <span class="cart-price2">{{p.selling_price}}      
+                                    </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock main-content %}

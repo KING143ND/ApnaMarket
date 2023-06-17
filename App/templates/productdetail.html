@@ -1,0 +1,49 @@
+{% extends 'base.html' %} {% load static %} {% block title %}Product Detail{% endblock title %} {% block main-content %} {% for p in products %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-6 text-center align-self-center">
+            <img src="{{p.product_image.url}}" alt class="img-fluid" />
+        </div>
+        <div class="col-md-5 offset-md-1">
+            <h2>{{p.title}}</h2>
+            <hr />
+            <p>{{p.description}}</p>
+            <br />
+                <div class="detailed_Rating">
+                    <span class="badge bg-success my-2">{{p.rating}} &#9733;</span>
+                    <span class="product-review mx-2">{{p.review}} Reviews</span>
+                </div>
+                <h4>
+                    Rs. {{p.discounted_price}}
+                    <small class="fw-light text-decoration-line-through">{{p.selling_price}}</small>
+                </h4>
+                <br />
+                <form action="/add-to-cart/{{p.id}}" class="d-inline">
+                    <input type="hidden" name="prod_id" value="{{p.id}}" id="prod_id" />
+                    <button type="submit" class="btn btn-primary shadow px-4 py-2">
+                        Add to Cart
+                    </button>
+                </form>
+                <form action="/buy/" class="d-inline">
+                    <input type="hidden" name="prod_id2" value="{{p.id}}" id="prod_id2" />
+                    <button type="submit" class="btn btn-danger shadow px-4 py-2 ms-4">
+                        Buy Now
+                    </button>
+                </form>
+            {% comment %}
+            <a href="/buy" class="btn btn-danger shadow px-5 py-2 ms-4">Buy Now</a> {% endcomment %}
+            <h5 class="mt-5">Available Offers</h5>
+            <ul>
+                <li>Bank Offer 5% Unlimited Cashback on Flipkart Axis Bank Credit
+                </li>
+                <li>Special Price Get extra ₹3000 off (price inclusive of discount)
+                </li>
+                <li>No cost EMI ₹1,667/month. Standard EMI also available</li>
+                <li>
+                    Partner Offer ₹2000 Flipkart Gift Card on Every 1000th Transaction with a new Visa Debit/Credit Card
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endfor %} {% endblock main-content %}

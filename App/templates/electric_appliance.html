@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Electrical Appliances{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+ <div class="row">
+  <div class="col-md-2 fixed">
+   <div class="list-group">
+    <a href="/electricappliances" class="list-group-item list-group-item-action">All Electrical Appliances</a>
+    <a href="/electricappliances/filter=Television" class="list-group-item list-group-item-action">Television</a>
+    <a href="/electricappliances/filter=Air_Conditioner" class="list-group-item list-group-item-action">Air Conditioner</a>
+    <a href="/electricappliances/filter=Refrigerator" class="list-group-item list-group-item-action">Refrigerator</a>
+    <a href="/electricappliances/filter=Washing_Machine" class="list-group-item list-group-item-action">Washing Machine</a>
+    <a href="/electricappliances/filter=Audio" class="list-group-item list-group-item-action">Audio</a>
+    <a href="/electricappliances/filter=Gaming" class="list-group-item list-group-item-action">Gaming</a>
+    <a href="/electricappliances/filter=Laptop_Accessories" class="list-group-item list-group-item-action">Laptop Accessories</a>
+    <a href="/electricappliances/filter=Camera_Accessories" class="list-group-item list-group-item-action">Camera Accessories</a>
+    <a href="/electricappliances/filter=Others" class="list-group-item list-group-item-action">Others</a>
+    <a href="/electricappliances/filter=low_to_high" class="list-group-item list-group-item-action">Price:Low to High</a>
+    <a href="/electricappliances/filter=high_to_low" class="list-group-item list-group-item-action">Price:High to Low</a>
+    <a href="/electricappliances/filter=below_100" class="list-group-item list-group-item-action">Below 100</a>
+    <a href="/electricappliances/filter=below_200" class="list-group-item list-group-item-action">Below 200</a>
+    <a href="/electricappliances/filter=below_500" class="list-group-item list-group-item-action">Below 500</a>
+    <a href="/electricappliances/filter=below_1000" class="list-group-item list-group-item-action">Below 1000</a>
+    <a href="/electricappliances/filter=below_2000" class="list-group-item list-group-item-action">Below 2000</a>
+    <a href="/electricappliances/filter=below_5000" class="list-group-item list-group-item-action">Below 5000</a>
+    <a href="/electricappliances/filter=below_10000" class="list-group-item list-group-item-action">Below 10000</a>
+    <a href="/electricappliances/filter=below_25000" class="list-group-item list-group-item-action">Below 25000</a>
+    <a href="/electricappliances/filter=above_25000" class="list-group-item list-group-item-action">Above 25000</a>
+    <a href="/electricappliances/filter=customer_rating" class="list-group-item list-group-item-action">Customer Rating</a>
+    <a href="/electricappliances/filter=customer_review" class="list-group-item list-group-item-action">Customer Reviews</a>
+   </div>
+  </div>
+    <div class="col-md-10">
+        <div class="row" >
+        {% for m in elect %}
+            <div class='col-md-4 text-center mb-4'>
+                <a href="/product-detail/{{m.title}}" class='btn'>
+                    <div class="item">
+                        <div style="height: 180px; width: 180px; position: relative;
+                        margin: 0 auto;">
+                            <img src="{{m.product_image.url}}" alt="" class="p-img">
+                        </div>
+                        <div class="product-desc">
+                            <span class="product-title">{{m.title}}</span>
+                            <span class="badge bg-success">{{m.rating}}<i class="ri-star-fill"></i></span>
+                            <span class="product-review">{{m.review}}</span>
+                        </div>
+                        <div class="fw-bold">₹{{m.discounted_price}} <small class='fw-light text-decoration-line-through'>₹{{m.selling_price}}</small></div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+ </div>
+</div>
+{% endblock main-content %}

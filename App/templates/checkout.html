@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Buy Now{% endblock title %}
+{% block main-content %}
+<div class="container">
+ <div class="row mt-5">
+  <div class="col-md-6">
+    <h4>Order Summary</h4>
+    <hr>
+    {% for p in cart %}
+    <div class="card mb-2">
+      <div class="card-body">
+        <div class="row">
+          <a href="/product-detail/{{p.product.title}}" class="col-md-4 text-center align-self-center"><img src="{{p.product.product_image.url}}" alt="" srcset="" class="img-fluid" height="150" width="150"> </a>
+          <div class="col-md-8 my-3">
+            <div>
+                {% if p.product.title|length > 40 %}
+                <a class="heading" href="/product-detail/{{p.product.title}}"><h5>{{p.product.title|slice:"0:40"}}...</h5></a>                              
+                {% else  %}
+                <a class="heading" href="/product-detail/{{p.product.title}}"><h5>{{p.product.title}}</h5></a>                              
+                {% endif %}
+                <div class="fs-6">
+                    <label class="text-primary">Delivery Time: </label>
+                    <span class="my-2 mx-2">7 Days</span>
+                    <br>
+                    <label class="text-primary">Ratings & Reviews: </label>
+                    <span class="badge bg-success small my-2"> {{p.product.rating}} &#9733;</span>
+                    <span class="small">{{p.product.review}} Reviews</span>
+                    <br>
+                    <label class="text-primary">Product Price: </label>
+                    <span class="my-2 mx-2">₹{{p.product.discounted_price}}</span>
+                    <br>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    <small>Term and Condition: Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, ullam saepe! Iure optio repellat dolor velit, minus rem. Facilis cumque neque numquam laboriosam, accusantium adipisci nisi nihil in et quis?</small>
+  </div>
+  <div class="col-md-4 offset-md-1">
+    <h4>Select Shipping Address</h4>
+    <hr>
+    <form action="/payment/">
+      {% for p in add %}
+      <div class="card">
+        <div class="card-body">
+        <h5 class="text-primary">{{p.name}}</h5>
+        <p>{{p.locality}}, {{p.city}}, {{p.state}} - {{p.zipcode}}</p>
+        </div>
+      </div>
+      <div class="form-check mt-2 mb-3">
+        <input class="form-check-input" type="radio" name="custid" id="custadd{{forloop.counter}}" value="{{p.id}}"required>
+        <label class="form-check-label fw-bold" for="custadd{{forloop.counter}}">
+          Address: {{forloop.counter}} </label>
+      </div>
+      {% endfor %}
+        <div class="card">
+            <div class="card-body">
+                <h3>Price Details</h3>
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0 fs-5">Price (
+                        {% if product_count_in_cart == 1 %}
+                        {{ product_count_in_cart }} item)<span>₹{{total_price}}</span></li>
+                        {% else %}
+                        {{ product_count_in_cart }} items)<span>₹{{total_price}}</span></li>
+                        {% endif %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 fs-5">Delivery Charges
+                        {% if shipping_price == 0 %}
+                        <span class="text-success2">Free</span></li>
+                        {% else %}
+                        <span>₹{{shipping_price}}</span></li>
+                        {% endif %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3 fs-5">
+                        <div>
+                            <strong>Total Payable</strong> <small>(including GST)</small>
+                        </div>
+                        <span><strong class="cart-price">₹{{final_price}}</strong></span>
+                    </li><hr>
+                    <h5 class="text-center text-success2">You will save ₹{{final_saving_price}} on this order</h5>
+                </ul>
+            </div>
+        </div>
+        <div class="text-end">
+          <button type="submit" class="btn btn-warning mt-3 px-5 fw-bold">Continue</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock main-content %}
