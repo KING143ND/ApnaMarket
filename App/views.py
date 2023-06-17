@@ -189,7 +189,7 @@ def buy_now(request):
     Cart(user=user,product=product).save()
     return redirect ("/checkout")
 
-
+@login_required(login_url="/login")
 def profile(request):
     if request.user.is_authenticated:
         product_count_in_cart=len(Cart.objects.filter(user=request.user))
@@ -258,6 +258,7 @@ def profile(request):
     return render(request, 'profile.html',{'product_count_in_cart':product_count_in_cart,'active':'btn-primary'})
 
 
+@login_required(login_url="/login")
 def address(request):
     if request.user.is_authenticated:
         product_count_in_cart=len(Cart.objects.filter(user=request.user))
@@ -274,6 +275,7 @@ def address_del(request,pk):
     return redirect("/")
 
 
+@login_required(login_url="/login")
 def orders(request):
     if request.user.is_authenticated:
         product_count_in_cart=len(Cart.objects.filter(user=request.user))
@@ -283,6 +285,7 @@ def orders(request):
     return render(request, 'orders.html',{'product_count_in_cart':product_count_in_cart,'op':op})
 
 
+@login_required(login_url="/login")
 def change_password(request):
     if request.user.is_authenticated:
         product_count_in_cart=len(Cart.objects.filter(user=request.user))
