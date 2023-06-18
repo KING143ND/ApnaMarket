@@ -4,7 +4,7 @@
 {% block main-content %}
 <div class="container">
  <div class="row mt-5">
-  <div class="col-md-6">
+  <div class="col-md-6 mb-4">
     <h4>Order Summary</h4>
     <hr>
     {% for p in cart %}
@@ -37,11 +37,15 @@
       </div>
     </div>
     {% endfor %}
-    <small>Term and Condition: Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, ullam saepe! Iure optio repellat dolor velit, minus rem. Facilis cumque neque numquam laboriosam, accusantium adipisci nisi nihil in et quis?</small>
+    <small class="mb-5">Term and Condition: ApnaMarket Foundation is a Section 8 company registered under the Companies Act 2013. ApnaMarket Internet Pvt. Ltd may not be share your Personal Identifiable Information which may include your name, phone number, etc with ApnaMarket Foundation.</small>
   </div>
   <div class="col-md-4 offset-md-1">
     <h4>Select Shipping Address</h4>
     <hr>
+    {% if add|length == 0 %}
+    <h5 class="text-primar">No Address found,to Add your Address</h5>
+    <div class="text-primary text-center mb-4"><a href="/profile">visit here</a></div>
+    {% endif %}
     <form action="/payment/">
       {% for p in add %}
       <div class="card">

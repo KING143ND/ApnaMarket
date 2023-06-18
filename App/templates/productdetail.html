@@ -1,5 +1,5 @@
 {% extends 'base.html' %} {% load static %} {% block title %}Product Detail{% endblock title %} {% block main-content %} {% for p in products %}
-<div class="container my-5">
+<div class="container my-4">
     <div class="row">
         <div class="col-md-6 text-center align-self-center">
             <img src="{{p.product_image.url}}" alt class="img-fluid" />

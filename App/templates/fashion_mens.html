@@ -2,37 +2,70 @@
 {% load static %}
 {% block title %}Mens Fashion{% endblock title %}
 {% block main-content %}
-<div class="container my-5">
+<div class="container my-3">
  <div class="row">
   <div class="col-md-2 fixed">
-   <div class="list-group">
-    <a href="/fashion/mens" class="list-group-item list-group-item-action-active">All Mens Fashion</a>
-    <a href="/fashion/mens/filter=T-Shirts" class="list-group-item list-group-item-action">T-Shirts</a>
-    <a href="/fashion/mens/filter=Shirts" class="list-group-item list-group-item-action">Shirts</a>
-    <a href="/fashion/mens/filter=Winter_Wears" class="list-group-item list-group-item-action">Winter_Wears</a>
-    <a href="/fashion/mens/filter=Blazers" class="list-group-item list-group-item-action">Blazers</a>
-    <a href="/fashion/mens/filter=Suits" class="list-group-item list-group-item-action">Suits</a>
-    <a href="/fashion/mens/filter=Jeans" class="list-group-item list-group-item-action">Jeans</a>
-    <a href="/fashion/mens/filter=Trousers" class="list-group-item list-group-item-action">Trousers</a>
-    <a href="/fashion/mens/filter=Trackpants" class="list-group-item list-group-item-action">Trackpants</a>
-    <a href="/fashion/mens/filter=Shoes" class="list-group-item list-group-item-action">Shoes</a>
-    <a href="/fashion/mens/filter=Slippers" class="list-group-item list-group-item-action">Slippers</a>
-    <a href="/fashion/mens/filter=Wallets" class="list-group-item list-group-item-action">Wallets</a>
-    <a href="/fashion/mens/filter=Watches" class="list-group-item list-group-item-action">Watches</a>
-    <a href="/fashion/mens/filter=Sunglasses" class="list-group-item list-group-item-action">Sunglasses</a>
-    <a href="/fashion/mens/filter=Belts" class="list-group-item list-group-item-action">Belts</a>
-    <a href="/fashion/mens/filter=Jewellery" class="list-group-item list-group-item-action">Jewellery</a>
-    <a href="/fashion/mens/filter=low_to_high" class="list-group-item list-group-item-action">Price:Low to High</a>
-    <a href="/fashion/mens/filter=high_to_low" class="list-group-item list-group-item-action">Price:High to Low</a>
-    <a href="/fashion/mens/filter=below_100" class="list-group-item list-group-item-action">Below 100</a>
-    <a href="/fashion/mens/filter=below_200" class="list-group-item list-group-item-action">Below 200</a>
-    <a href="/fashion/mens/filter=below_500" class="list-group-item list-group-item-action">Below 500</a>
-    <a href="/fashion/mens/filter=below_1000" class="list-group-item list-group-item-action">Below 1000</a>
-    <a href="/fashion/mens/filter=below_2000" class="list-group-item list-group-item-action">Below 2000</a>
-    <a href="/fashion/mens/filter=above_2000" class="list-group-item list-group-item-action">Above 2000</a>
-    <a href="/fashion/mens/filter=customer_rating" class="list-group-item list-group-item-action">Customer Rating</a>
-    <a href="/fashion/mens/filter=customer_review" class="list-group-item list-group-item-action">Customer Reviews</a>
-   </div>
+    <div class="dropdown d-flex flex-column justify-content-center m-3">
+        <button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Top Wears
+        </button>
+        <ul class="dropdown-menu dropdown-menu-light">
+            <a href="/fashion/mens/filter=T-Shirts" class="dropdown-item">T-Shirts</a>
+            <a href="/fashion/mens/filter=Shirts" class="dropdown-item">Shirts</a>
+            <a href="/fashion/mens/filter=Winter_Wears" class="dropdown-item">Winter_Wears</a>
+            <a href="/fashion/mens/filter=Blazers" class="dropdown-item">Blazers</a>
+            <a href="/fashion/mens/filter=Suits" class="dropdown-item">Suits</a>  
+        </ul>
+    </div>
+    <div class="dropdown d-flex flex-column justify-content-center m-3">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Bottom Wears
+        </button>
+        <ul class="dropdown-menu dropdown-menu-light">
+            <a href="/fashion/mens/filter=Jeans" class="dropdown-item">Jeans</a>
+            <a href="/fashion/mens/filter=Trousers" class="dropdown-item">Trousers</a>
+            <a href="/fashion/mens/filter=Trackpants" class="dropdown-item">Trackpants</a>
+            <a href="/fashion/mens/filter=Shoes" class="dropdown-item">Shoes</a>
+            <a href="/fashion/mens/filter=Slippers" class="dropdown-item">Slippers</a> 
+        </ul>
+    </div>
+    <div class="dropdown d-flex flex-column justify-content-center m-3">
+        <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Mens Accessories
+        </button>
+        <ul class="dropdown-menu dropdown-menu-light">
+            <a href="/fashion/mens/filter=Wallets" class="dropdown-item">Wallets</a>
+            <a href="/fashion/mens/filter=Watches" class="dropdown-item">Watches</a>
+            <a href="/fashion/mens/filter=Sunglasses" class="dropdown-item">Sunglasses</a>
+            <a href="/fashion/mens/filter=Belts" class="dropdown-item">Belts</a>
+            <a href="/fashion/mens/filter=Jewellery" class="dropdown-item">Jewellery</a> 
+        </ul>
+    </div>
+      <div class="dropdown d-flex flex-column justify-content-center m-3">
+        <button class="btn btn-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Price
+        </button>
+        <ul class="dropdown-menu dropdown-menu-light">
+            <a href="/fashion/mens/filter=low_to_high" class="dropdown-item">Price:Low to High</a>
+    <a href="/fashion/mens/filter=high_to_low" class="dropdown-item">Price:High to Low</a>
+    <a href="/fashion/mens/filter=below_100" class="dropdown-item">Below 100</a>
+    <a href="/fashion/mens/filter=below_200" class="dropdown-item">Below 200</a>
+    <a href="/fashion/mens/filter=below_500" class="dropdown-item">Below 500</a>
+    <a href="/fashion/mens/filter=below_1000" class="dropdown-item">Below 1000</a>
+    <a href="/fashion/mens/filter=below_2000" class="dropdown-item">Below 2000</a>
+    <a href="/fashion/mens/filter=above_2000" class="dropdown-item">Above 2000</a>
+        </ul>
+      </div>
+      <div class="dropdown d-flex flex-column justify-content-center m-3">
+          <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Feedback
+          </button>
+          <ul class="dropdown-menu dropdown-menu-center-light">
+            <a href="/fashion/mens/filter=customer_rating" class="dropdown-item">Customer Rating</a>
+    <a href="/fashion/mens/filter=customer_review" class="dropdown-item">Customer Reviews</a>
+          </ul>
+      </div>
+   
   </div>
     <div class="col-md-10">
         <div class="row" >

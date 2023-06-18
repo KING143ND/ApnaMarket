@@ -26,6 +26,7 @@ def home(request):
         product_count_in_cart=0
     return render(request, 'home.html',{'products':products,'mobiles':mobiles,'laptops':laptops,'electronics':electronics,'mfashion':mfashion,'wfashion':wfashion,'grocery':grocery,'home':home,'toys':toys,'medicine':medicine,'fashion':fashion,'product_count_in_cart':product_count_in_cart})
 
+
 def product_detail(request,title):
     if request.user.is_authenticated:
         product_count_in_cart=len(Cart.objects.filter(user=request.user))
@@ -64,6 +65,8 @@ def add_to_cart(request,pk):
         response.set_cookie('product_ids', pk)
     return response
 
+
+@login_required(login_url="/login")
 def cart_view(request):
     if request.user.is_authenticated:
         product_count_in_cart=len(Cart.objects.filter(user=request.user))
@@ -179,6 +182,7 @@ def remove_from_cart(request,pk):
             response.delete_cookie('product_ids')
         response.set_cookie('product_ids',value)
         return response 
+ 
     
 @login_required(login_url="/login")
 def buy_now(request):
@@ -188,6 +192,7 @@ def buy_now(request):
     product=Product.objects.get(pk=product_id)
     Cart(user=user,product=product).save()
     return redirect ("/checkout")
+
 
 @login_required(login_url="/login")
 def profile(request):
@@ -754,6 +759,10 @@ def checkout(request):
 
 def payment(request):
     user=request.user
+    add=Customer.objects.filter(user=user) 
+    if len(add)==0:
+        messages.warning(request,"Please first add your Address then continue")
+        return redirect("/profile")
     custid=request.GET.get("custid")
     customer=Customer.objects.get(pk=custid)
     cart=Cart.objects.filter(user=user)

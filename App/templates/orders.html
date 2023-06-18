@@ -10,6 +10,11 @@
     <li class="d-grid"><a href="/orders" class="btn btn-primary">Orders</a></li>
    </ul>
   </div>
+  {% if op|length == 0  %}
+<div class="col-lg-6 text-center">
+<h1 class="text-center">No Address Added</h1>
+</div>
+{% endif %}
   <div class="col-md-9 offset-md-1">
     {% for p in op %}
     <div class="row shadow-md mb-3">

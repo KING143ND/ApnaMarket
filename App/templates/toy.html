@@ -2,28 +2,47 @@
 {% load static %}
 {% block title %}Toys{% endblock title %}
 {% block main-content %}
-<div class="container my-5">
+<div class="container my-3">
  <div class="row">
   <div class="col-md-2 fixed">
-   <div class="list-group">
-    <a href="/toys" class="list-group-item list-group-item-action">All Toys</a>
-    <a href="/toys/filter=Soft_Toys" class="list-group-item list-group-item-action">Soft Toys</a>
-    <a href="/toys/filter=Remote_Control_Toys" class="list-group-item list-group-item-action">Remote Control Toys</a>
-    <a href="/toys/filter=Puzzles" class="list-group-item list-group-item-action">Puzzles</a>
-    <a href="/toys/filter=Board_Games" class="list-group-item list-group-item-action">Board Games</a>
-    <a href="/toys/filter=Learning_Toys" class="list-group-item list-group-item-action">Learning Toys</a>
-    <a href="/toys/filter=Baby_Toys" class="list-group-item list-group-item-action">Baby Toys</a>
-    <a href="/toys/filter=low_to_high" class="list-group-item list-group-item-action">Price:Low to High</a>
-    <a href="/toys/filter=high_to_low" class="list-group-item list-group-item-action">Price:High to Low</a>
-    <a href="/toys/filter=below_100" class="list-group-item list-group-item-action">Below 100</a>
-    <a href="/toys/filter=below_200" class="list-group-item list-group-item-action">Below 200</a>
-    <a href="/toys/filter=below_500" class="list-group-item list-group-item-action">Below 500</a>
-    <a href="/toys/filter=below_1000" class="list-group-item list-group-item-action">Below 1000</a>
-    <a href="/toys/filter=below_2000" class="list-group-item list-group-item-action">Below 2000</a>
-    <a href="/toys/filter=above_2000" class="list-group-item list-group-item-action">Above 2000</a>
-    <a href="/toys/filter=customer_rating" class="list-group-item list-group-item-action">Customer Rating</a>
-    <a href="/toys/filter=customer_review" class="list-group-item list-group-item-action">Customer Reviews</a>
-   </div>
+    <div class="dropdown d-flex flex-column justify-content-center m-3">
+        <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Categories
+        </button>
+        <ul class="dropdown-menu dropdown-menu-light">
+            <a href="/toys/filter=Soft_Toys" class="dropdown-item">Soft Toys</a>
+    <a href="/toys/filter=Remote_Control_Toys" class="dropdown-item">Remote Control Toys</a>
+    <a href="/toys/filter=Puzzles" class="dropdown-item">Puzzles</a>
+    <a href="/toys/filter=Board_Games" class="dropdown-item">Board Games</a>
+    <a href="/toys/filter=Learning_Toys" class="dropdown-item">Learning Toys</a>
+    <a href="/toys/filter=Baby_Toys" class="dropdown-item">Baby Toys</a>
+        </ul>
+      </div>
+      <div class="dropdown d-flex flex-column justify-content-center m-3">
+        <button class="btn btn-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Price
+        </button>
+        <ul class="dropdown-menu dropdown-menu-light">
+            <a href="/toys/filter=low_to_high" class="dropdown-item">Price:Low to High</a>
+    <a href="/toys/filter=high_to_low" class="dropdown-item">Price:High to Low</a>
+    <a href="/toys/filter=below_100" class="dropdown-item">Below 100</a>
+    <a href="/toys/filter=below_200" class="dropdown-item">Below 200</a>
+    <a href="/toys/filter=below_500" class="dropdown-item">Below 500</a>
+    <a href="/toys/filter=below_1000" class="dropdown-item">Below 1000</a>
+    <a href="/toys/filter=below_2000" class="dropdown-item">Below 2000</a>
+    <a href="/toys/filter=above_2000" class="dropdown-item">Above 2000</a>
+        </ul>
+      </div>
+      <div class="dropdown d-flex flex-column justify-content-center m-3">
+          <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Feedback
+          </button>
+          <ul class="dropdown-menu dropdown-menu-center-light">
+            <a href="/toys/filter=customer_rating" class="dropdown-item">Customer Rating</a>
+    <a href="/toys/filter=customer_review" class="dropdown-item">Customer Reviews</a>
+          </ul>
+      </div>
+   
   </div>
     <div class="col-md-10">
         <div class="row" >
