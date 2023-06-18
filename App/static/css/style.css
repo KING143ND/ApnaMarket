@@ -428,35 +428,35 @@ body {
     margin-top: 10px;
     padding-bottom: 3px;
     flex-direction: row;
-    column-gap: 25px;
+    column-gap: 15px;
 }
 
 .al-pn {
     color: rgb(26, 58, 202);
-    font-size: 25px;
+    font-size: 30px;
 }
 
 .al-fb {
     color: blue;
-    font-size: 25px;
+    font-size: 30px;
 }
 
 .al-ig {
     color: #e40bc7;
-    font-size: 25px;
+    font-size: 30px;
 }
 
 .al-tw {
     color: #00acee;
-    font-size: 25px;
+    font-size: 30px;
 }
 
 .al-wp {
     color: #16c905;
-    font-size: 25px;
+    font-size: 30px;
 }
 
 .al-em {
     color: rgb(221, 0, 0);
-    font-size: 25px;
+    font-size: 30px;
 }
