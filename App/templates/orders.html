@@ -7,19 +7,19 @@
  <h3>Welcome {{request.user}}</h3>
   <div class="col-md-2 border-end">
    <ul class="list-unstyled">
-    <li class="d-grid"><a href="/orders" class="btn btn-primary">Orders</a></li>
+    <li class="d-grid"><a href="/orders" class="btn btn-primary">My Orders</a></li>
    </ul>
   </div>
   {% if op|length == 0  %}
 <div class="col-lg-6 text-center">
-<h1 class="text-center">No Address Added</h1>
+<h1 class="text-center">No Order Placed</h1>
 </div>
 {% endif %}
   <div class="col-md-9">
     {% for p in op %}
     <div class="row shadow-md mb-3">
         <a href="/product-detail/{{p.product.title}}" class="col-md-4 text-center align-self-center">
-          <div style="height: 180px; width: 180px; position: relative;
+          <div style="height: 180px; width: aut; position: relative;
                         margin: 0 auto;"><img src="{{p.product.product_image.url}}" alt="" class="img-fluid p-img"></div>
         </a>
      <div class="col-md-7">
