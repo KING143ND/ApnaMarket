@@ -802,50 +802,51 @@ def contact(request):
         lastName=request.POST['lastName']
         email=request.POST['email']
         massage =request.POST['massage']
-        if len(firstName)==0:
-            messages.error(request, "Your First Name cannot be Empty!")
-            return redirect('/contact')
-        elif len(lastName)==0:
-            messages.error(request, "Your Last Name cannot be Empty!")
-            return redirect('/contact')
-        elif len(email)==0:
-            messages.error(request, "Your Email cannot be Empty!")
-            return redirect('/contact')
-        elif len(massage)==0:
-            messages.error(request, "Your Message Box cannot be Empty!")
-            return redirect('/contact')
-        elif len(firstName)>30:
-            messages.error(request, "Your First Name must be under 30 Characters!")
-            return redirect('/contact')
-        elif len(firstName)<3:
-            messages.error(request, "Your First Name must be atleast 3 Characters!")
-            return redirect('/contact')
-        elif len(lastName)>30:
-            messages.error(request, "Your Last Name must be under 30 Characters!")
-            return redirect('/contact')
-        elif len(lastName)<3:
-            messages.error(request, "Your Last Name must be atleast 3 Characters!")
-            return redirect('/contact')
-        elif len(email)<6:
-            messages.error(request, "Your Email must be atleast 6 Characters!")
-            return redirect('/contact')
-        elif len(email)>50:
-            messages.error(request, "Your Email must be under 50 Characters!")
-            return redirect('/contact')
-        elif len(massage)<4:
-            messages.error(request, "Please fill atleast 4 Characters in Message Box")
-            return redirect('/contact')
-        elif len(massage)>1000:
-            messages.error(request, "Your Message must be under 1000 Characters!")
-            return redirect('/contact')
-        elif not request.user.is_authenticated:
-            messages.warning(request, "Your Message can't send because you have not login !")
-            return redirect('/login')
+        if request.user.is_authenticated:
+            if len(firstName)==0:
+                messages.error(request, "Your First Name cannot be Empty!")
+                return redirect('/contact')
+            elif len(lastName)==0:
+                messages.error(request, "Your Last Name cannot be Empty!")
+                return redirect('/contact')
+            elif len(email)==0:
+                messages.error(request, "Your Email cannot be Empty!")
+                return redirect('/contact')
+            elif len(massage)==0:
+                messages.error(request, "Your Message Box cannot be Empty!")
+                return redirect('/contact')
+            elif len(firstName)>30:
+                messages.error(request, "Your First Name must be under 30 Characters!")
+                return redirect('/contact')
+            elif len(firstName)<3:
+                messages.error(request, "Your First Name must be atleast 3 Characters!")
+                return redirect('/contact')
+            elif len(lastName)>30:
+                messages.error(request, "Your Last Name must be under 30 Characters!")
+                return redirect('/contact')
+            elif len(lastName)<3:
+                messages.error(request, "Your Last Name must be atleast 3 Characters!")
+                return redirect('/contact')
+            elif len(email)<6:
+                messages.error(request, "Your Email must be atleast 6 Characters!")
+                return redirect('/contact')
+            elif len(email)>50:
+                messages.error(request, "Your Email must be under 50 Characters!")
+                return redirect('/contact')
+            elif len(massage)<4:
+                messages.error(request, "Please fill atleast 4 Characters in Message Box")
+                return redirect('/contact')
+            elif len(massage)>1000:
+                messages.error(request, "Your Message must be under 1000 Characters!")
+                return redirect('/contact')                
+            else:
+                contact=Contact(firstName=firstName, email=email, lastName=lastName, massage=massage)
+                contact.save()
+                messages.success(request, "Your Message has been Successfully sent!")
+                return redirect('/')  
         else:
-            contact=Contact(firstName=firstName, email=email, lastName=lastName, massage=massage)
-            contact.save()
-            messages.success(request, "Your Message has been Successfully sent!")
-            return redirect('/')      
+            messages.warning(request, "Your Message can't send because you have not login !")
+            return redirect('/login')  
     return render(request, "contact.html")
 
 def terms(request):
