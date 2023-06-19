@@ -276,7 +276,7 @@ def address(request):
 def address_del(request,pk):
     customer=Customer.objects.get(pk=pk)
     customer.delete()
-    messages.success(request, "Your Address has been Deleted Sucessfully!")
+    messages.success(request, f"Your Address {customer} has been Deleted Sucessfully!")
     return redirect("/")
 
 
@@ -838,6 +838,9 @@ def contact(request):
         elif len(massage)>1000:
             messages.error(request, "Your Message must be under 1000 Characters!")
             return redirect('/contact')
+        elif not request.user.is_authenticated:
+            messages.warning(request, "Your Message can't send because you have not login !")
+            return redirect('/login')
         else:
             contact=Contact(firstName=firstName, email=email, lastName=lastName, massage=massage)
             contact.save()
@@ -851,3 +854,39 @@ def terms(request):
 def privacy(request):
     return render(request,"privacy.html")
     
+    
+import io
+from xhtml2pdf import pisa
+from django.template.loader import get_template
+from django.template import Context
+from django.http import HttpResponse
+
+
+def render_to_pdf(template_src, context_dict):
+    template = get_template(template_src)
+    html  = template.render(context_dict)
+    result = io.BytesIO()
+    pdf = pisa.pisaDocument(io.BytesIO(html.encode("ISO-8859-1")), result)
+    if not pdf.err:
+        return HttpResponse(result.getvalue(), content_type='application/pdf')
+    return
+
+def download_invoice_view(request,pk):
+    order=OrderPlaced.objects.get(id=pk)
+    mydict={
+        'orderDate':order.ordered_date,
+        'customerName':request.user,
+        'customerEmail':request.user.email,
+        'customerMobile':order.customer.phone,
+        'shipmentAddress':order.customer.locality,
+        'orderStatus':order.status,
+
+        'productName':order.product.title,
+        'productRat':order.product.rating,
+        'productRev':order.product.review,
+        'productPrice':order.product.discounted_price,
+        'productDescription':order.product.description,
+
+
+    }
+    return render_to_pdf('invoice.html',mydict)

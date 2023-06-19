@@ -29,7 +29,6 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-navbar">
         <div class="container">
-            {% comment %} <img class="mx-2" height="50px" src="{% static 'images\q1.png' %}" alt=""> {% endcomment %}
             <a class="navbar-brand" href="/">ApnaMarket</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -149,21 +148,29 @@
                         <li class="mb-2"><a class="text-white" href="/privacy">Privacy Policy</a></li>
                     </ul>
                 </div>
+                {% if user.is_authenticated %}
                 <div class="col-6 col-lg-2 mb-3">
                     <h5>Account</h5>
                     <ul class="list-unstyled">
-                        {% if not user.is_authenticated %}
-                        <li class="mb-2"><a class="text-white" href="/login">Login</a></li>
-                        {% endif %}
                         <li class="mb-2"><a class="text-white" href="/profile">Profile</a></li>
                         <li class="mb-2"><a class="text-white" href="/address">Address</a></li>
                         <li class="mb-2"><a class="text-white" href="/orders">Orders</a></li>
                         <li class="mb-2"><a class="text-white" href="/changepassword">Change Password</a></li>
-                        {% if user.is_authenticated %}
                         <li class="mb-2"><a class="text-white" href="/logout">Logout</a></li>
-                        {% endif %}
                     </ul>
                 </div>
+                {% else %}
+                <div class="col-6 col-lg-2 mb-3">
+                    <h5>Explore</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a class="text-white" href="/mobile">Mobiles</a></li>
+                        <li class="mb-2"><a class="text-white" href="/laptop">Laptops</a></li>
+                        <li class="mb-2"><a class="text-white" href="/fashion/mens">Mens Fashion</a></li>
+                        <li class="mb-2"><a class="text-white" href="/fashion/womens">Women Fashion</a></li>
+                        <li class="mb-2"><a class="text-white" href="/toys">Toys</a></li>
+                    </ul>
+                </div>
+                {% endif %}
                 <div class="col-6 col-lg-2 mb-3">
                     <h5>Electronics</h5>
                     <ul class="list-unstyled">

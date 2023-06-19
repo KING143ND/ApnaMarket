@@ -11,7 +11,10 @@
     <div class="card mb-2">
       <div class="card-body">
         <div class="row">
-          <a href="/product-detail/{{p.product.title}}" class="col-md-4 text-center align-self-center"><img src="{{p.product.product_image.url}}" alt="" srcset="" class="img-fluid" height="150" width="150"> </a>
+          <a href="/product-detail/{{p.product.title}}" class="col-md-4 text-center align-self-center">
+            <div style="height: 180px; width: 180px; position: relative;
+                        margin: 0 auto;"><img src="{{p.product.product_image.url}}" alt="" class="img-fluid p-img"></div>
+           </a>
           <div class="col-md-8 my-3">
             <div>
                 {% if p.product.title|length > 40 %}

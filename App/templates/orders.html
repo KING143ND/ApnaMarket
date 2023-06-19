@@ -15,11 +15,14 @@
 <h1 class="text-center">No Address Added</h1>
 </div>
 {% endif %}
-  <div class="col-md-9 offset-md-1">
+  <div class="col-md-9">
     {% for p in op %}
     <div class="row shadow-md mb-3">
-        <a href="/product-detail/{{p.product.title}}" class="col-md-3 text-center align-self-center"><img src="{{p.product.product_image.url}}" alt="" srcset="" class="img-fluid" height="150" width="150"> </a>
-     <div class="col-md-6">
+        <a href="/product-detail/{{p.product.title}}" class="col-md-4 text-center align-self-center">
+          <div style="height: 180px; width: 180px; position: relative;
+                        margin: 0 auto;"><img src="{{p.product.product_image.url}}" alt="" class="img-fluid p-img"></div>
+        </a>
+     <div class="col-md-7">
       <div class="">
         <div>
           <a class="heading" href="/product-detail/{{p.product.title}}"><h5 class="mt-2">{{p.product.title}}</h5></a>                              
@@ -27,16 +30,20 @@
               <label class="text-primary">Product Price: </label>
               <span class="my-2 mx-2">₹{{p.product.discounted_price}}</span>
               <br>
-              <label class="text-primary">Description: </label>
-              {% if p.product.description|length > 125 %}
-              <span class="mb-2 small">{{p.product.description|slice:"0:125"}}...</span>
+              <label class="text-primary">Order Date & Time: </label>
+              <span class="my-2 mx-2">{{p.ordered_date}}</span>
+              <br>
+              <label class="text-primary">Customer Name: </label>
+              <span class="my-2 mx-2">{{p.customer.name}}</span>
+              <br>
+              <label class="text-primary">Customer Address: </label>
+              {% if p.customer.locality|length > 125 %}
+              <span class="mb-2 small">{{p.customer.locality|slice:"0:125"}}...</span>
               {% else  %}
-              <span class="mb-2 small">{{p.product.description}}</span>
+              <span class="mb-2 small">{{p.customer.locality}}</span>
               {% endif %}
               <br>
-              <label class="text-primary">Ratings & Reviews: </label>
-              <span class="badge bg-success small my-2">{{p.product.rating}} &#9733;</span>
-              <span class="small">{{p.product.review}} Reviews</span>
+              <div><a style="text-decoration:none;" href="download-invoice/{{p.id}}" ><button class="btn btn-warning btn-sm mt-2">Download Invoice</button></a></div>
           </div>
       </div>
         {% if p.status == 'Accepted' %}
@@ -64,7 +71,7 @@
           <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 100%">{{p.status}}</div>
         </div>
         {% endif %}
-        <br>
+        <hr>
       </div>
      </div>
     </div>

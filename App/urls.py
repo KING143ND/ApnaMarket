@@ -44,5 +44,5 @@ urlpatterns = [
     path('contact/', views.contact, name="Search"),
     path('terms/', views.terms, name="Search"),
     path('privacy/', views.privacy, name="Search"),
-    
+    path('orders/download-invoice/<int:pk>/', views.download_invoice_view,name='download-invoice')
 ]
