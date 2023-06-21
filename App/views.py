@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponseRedirect
 from . models import *
 from django.contrib.auth.models import User, auth
 from django.contrib import messages 
@@ -213,7 +213,7 @@ def profile(request):
         inputAge = request.POST.get("inputAge","default")
         inputType = request.POST.get("inputType","default")
         if inputAge=='':
-            inputAge=0
+            inputAge='13'
  
         if Customer.objects.filter(email=inputEmail).exists():
             messages.error(request,"You already added this Email!") 
@@ -251,8 +251,10 @@ def profile(request):
             messages.error(request, "Your Pincode must be only 6 Characters!")
         elif len(inputZip)>6:
             messages.error(request, "Your Pincode must be only 6 Characters!")
-        elif len(inputPhone)<10:
-            messages.error(request, "Your Mobile Number must be only 10 Digits!")
+        elif inputAge<='12':
+            messages.warning(request, f"Your Age {inputAge} is Underage for Our Website!")
+        elif inputAge>'80':
+            messages.error(request, f"Really Your Age is {inputAge}... Please check it again!")
         elif len(inputPhone)>10:
             messages.error(request, "Your Mobile Number must be only 10 Digits!")
         else:
