@@ -1,10 +1,10 @@
-from django.shortcuts import render, redirect, HttpResponseRedirect
+from django.db.models import Sum
+from django.shortcuts import render, redirect
 from . models import *
-from django.contrib.auth.models import User, auth
-from django.contrib import messages 
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from django.contrib.auth import update_session_auth_hash
+from django.contrib import messages, auth
+from django.contrib.auth import update_session_auth_hash 
 from django.contrib.auth.forms import PasswordChangeForm
 
 
@@ -69,80 +69,81 @@ def add_to_cart(request,pk):
 @login_required(login_url="/login")
 def cart_view(request):
     if request.user.is_authenticated:
-        product_count_in_cart=len(Cart.objects.filter(user=request.user))
+        product_count_in_cart = len(Cart.objects.filter(user=request.user))
     else:
-        product_count_in_cart=0
+        product_count_in_cart = 0
         
-    products=None
+    products = None
+    total_price = 0
+    shipping_price = 0
+    final_price = 0
+    saving_price = 0
+    discount_pct = 0
+    coupon_price = 0
+    coupon = 0
+    coupon_code = 0
+    coupon_code2 = Coupon.objects.all()
+    cp_code = 0
+    applied_c_price = 0
+    final_saving_price = 0
     product_price=0
-    total_price=0
-    shipping_price=0
-    final_price=0
-    saving_price=0
-    discount_pct=0
-    coupon_price=0
-    coupon=0
-    coupon_code=0
-    coupon_code2=Coupon.objects.all()
-    cp_code=0
-    applied_c_price=0
-    final_saving_price=0
     if request.user.is_authenticated:
-            user=request.user
-            products=Cart.objects.filter(user=user)
-            for p in products:
-                total_price=(total_price+(p.product.discounted_price))
-                product_price=(product_price+(p.product.selling_price))
-            if total_price<=99:
-                shipping_price=99
-            elif total_price<=199:
-                shipping_price=95
-            elif total_price<=299:
-                shipping_price=89
-            elif total_price<=399:
-                shipping_price=85
-            elif total_price<=499:
-                shipping_price=79
-            elif total_price==500:
-                shipping_price=75
-            elif total_price<=799:
-                shipping_price=70
-            elif total_price<=999:
-                shipping_price=55
-            elif total_price==1000:
-                shipping_price=50
-            elif total_price<=1499:
-                shipping_price=25
-            elif total_price<=1999:
-                shipping_price=19
+        user = request.user
+        products = Cart.objects.filter(user=user)
+        
+        total_price = products.aggregate(Sum('product__discounted_price'))['product__discounted_price__sum'] or 0
+        product_price = products.aggregate(Sum('product__selling_price'))['product__selling_price__sum'] or 0
+        
+        if total_price <= 99:
+            shipping_price = 99
+        elif total_price <= 199:
+            shipping_price = 95
+        elif total_price <= 299:
+            shipping_price = 89
+        elif total_price <= 399:
+            shipping_price = 85
+        elif total_price <= 499:
+            shipping_price = 79
+        elif total_price == 500:
+            shipping_price = 75
+        elif total_price <= 799:
+            shipping_price = 70
+        elif total_price <= 999:
+            shipping_price = 55
+        elif total_price == 1000:
+            shipping_price = 50
+        elif total_price <= 1499:
+            shipping_price = 25
+        elif total_price <= 1999:
+            shipping_price = 19
+        else:
+            shipping_price = 0
+        
+        if request.method == 'POST':  
+            coupon = request.POST['coupon'] 
+            cp_code = Coupon.objects.filter(code=coupon)
+            
+            if cp_code:
+                for p in Coupon.objects.filter(code=coupon):
+                    if int((p.discount*10/100)+p.discount) > total_price:
+                        messages.error(request, f"Add item worth Rs.{int((p.discount*10/100)+p.discount)-total_price} in your Cart for Applying Coupon {coupon}")
+                    else:
+                        coupon_price = p.discount
+                        coupon_code = p.code
+                        messages.success(request, f"Coupon {coupon} has been Successfully Appied")
             else:
-                shipping_price=0
-            if request.method == 'POST':  
-                coupon = request.POST['coupon'] 
-                cp_code=Coupon.objects.filter(code=coupon)
-                if cp_code:
-                    for p in Coupon.objects.filter(code=coupon):
-                        print(p.discount)
-                        print(int((p.discount*10/100)+p.discount))
-                        print(total_price)
-                        if int((p.discount*10/100)+p.discount)>(total_price):
-                            messages.error(request,f"Add item worth Rs.{int((p.discount*10/100)+p.discount)-total_price} in your Cart for Applying Coupon {coupon}")
-                        else:
-                            coupon_price=(p.discount)
-                            coupon_code=(p.code)
-                            messages.success(request,f"Coupon {coupon} has been Successfully Appied")
-                            
-                else:
-                    coupon_price=0
-                    coupon_code=0
-                    messages.error(request,f"Coupon {coupon} has been Invalid")
-            final_price=total_price+shipping_price-coupon_price 
-            saving_price=product_price-total_price
-            final_saving_price=product_price-total_price+coupon_price
-            discount_pct=125/45*100
+                coupon_price = 0
+                coupon_code = 0
+                messages.error(request, f"Coupon {coupon} has been Invalid")
+        
+        final_price = total_price + shipping_price - coupon_price 
+        saving_price = product_price - total_price
+        final_saving_price = product_price - total_price + coupon_price
+        discount_pct = 125/45*100
+    
     print(final_price)
-    context={'products':products,'saving_price':saving_price,'product_price':product_price, 'total_price':total_price,'shipping_price':shipping_price,'final_price':final_price,'coupon_price':coupon_price,'discount_pct':discount_pct,'applied_c_price':applied_c_price,'product_count_in_cart':product_count_in_cart,'coupon':coupon,'coupon_code':coupon_code,'coupon_code2':coupon_code2,'cp_code':cp_code,'final_saving_price':final_saving_price}
-    return render(request,'addtocart.html',context)
+    context = {'products': products, 'saving_price': saving_price, 'product_price': product_price, 'total_price': total_price, 'shipping_price': shipping_price, 'final_price': final_price, 'coupon_price': coupon_price, 'discount_pct': discount_pct, 'applied_c_price': applied_c_price, 'product_count_in_cart': product_count_in_cart, 'coupon': coupon, 'coupon_code': coupon_code, 'coupon_code2': coupon_code2, 'cp_code': cp_code, 'final_saving_price': final_saving_price}
+    return render(request, 'addtocart.html', context)
  
  
 def remove_from_cart(request,pk):
@@ -161,15 +162,7 @@ def remove_from_cart(request,pk):
         Cart.objects.filter(user=user,product=product).delete()
         products=Cart.objects.all().filter(id__in = product_id_in_cart)
         products=Cart.objects.filter(user=user)
-        for p in products:
-            total=total+p.product.discounted_price
-            print(p.product.discounted_price)
-        value=""
-        for i in range(len(product_id_in_cart)):
-            if i==0:
-                value=value+product_id_in_cart[0]
-            else:
-                value=value+"|"+product_id_in_cart[i]
+        total = products.aggregate(Sum('product__discounted_price'))['product__discounted_price__sum']
         product=Product.objects.all().get(pk=pk)
         response = render(request, 'addtocart.html',{'products':products,'total':total,'product_count_in_cart':product_count_in_cart})
         if total==0:
@@ -178,10 +171,7 @@ def remove_from_cart(request,pk):
         else:
             messages.success(request, product.title + ' Removed to Cart Successfully!')
             response = redirect("/cart")
-        if value=="":
-            response.delete_cookie('product_ids')
-        response.set_cookie('product_ids',value)
-        return response 
+        return response
  
     
 @login_required(login_url="/login")
@@ -870,9 +860,10 @@ def render_to_pdf(template_src, context_dict):
     html  = template.render(context_dict)
     result = io.BytesIO()
     pdf = pisa.pisaDocument(io.BytesIO(html.encode("ISO-8859-1")), result)
-    if not pdf.err:
+    if not pdf:
+        return 
+    else:
         return HttpResponse(result.getvalue(), content_type='application/pdf')
-    return
 
 def download_invoice_view(request,pk):
     order=OrderPlaced.objects.get(id=pk)

@@ -460,3 +460,6 @@ body {
     color: rgb(221, 0, 0);
     font-size: 30px;
 }
+#number {
+    width: 35px;
+  }

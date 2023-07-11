@@ -131,6 +131,7 @@ TYPE_CHOICES = (
 )
 class Product (models.Model):
     title= models.CharField(max_length=300)
+    quantity=models.PositiveIntegerField(default=0)
     selling_price = models.PositiveIntegerField()
     discounted_price = models.PositiveIntegerField()
     description = models.TextField()

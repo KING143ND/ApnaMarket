@@ -18,6 +18,12 @@
                     <small class="fw-light text-decoration-line-through">{{p.selling_price}}</small>
                 </h4>
                 <br />
+                {% comment %} <form method='post' class="quantity buttons_added d-inline btn btn-success shadow px-4 py-2">
+                    {% csrf_token %}
+                    <label for="inputAge" class="form-label mt-2 mb-4">Quantity</label>
+                    <input type="number" step="1" min="1" max="13" id="qtd" name="qtd" class="input-text qty text bg-success" size="1" default='2'>
+                </form>
+                <br /> {% endcomment %}
                 <form action="/add-to-cart/{{p.id}}" class="d-inline">
                     <input type="hidden" name="prod_id" value="{{p.id}}" id="prod_id" />
                     <button type="submit" class="btn btn-primary shadow px-4 py-2">
@@ -30,8 +36,7 @@
                         Buy Now
                     </button>
                 </form>
-            {% comment %}
-            <a href="/buy" class="btn btn-danger shadow px-5 py-2 ms-4">Buy Now</a> {% endcomment %}
+                
             <h5 class="mt-5">Available Offers</h5>
             <ul>
                 <li>Bank Offer 5% Unlimited Cashback on Flipkart Axis Bank Credit
