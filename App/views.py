@@ -152,26 +152,21 @@ def remove_from_cart(request,pk):
     else:
         product_count_in_cart=0
     total=0
-    if 'product_ids' in request.COOKIES:
-        product_ids = request.COOKIES['product_ids']
-        product_id_in_cart=product_ids.split('|')
-        product_id_in_cart=list(set(product_id_in_cart))
-        user=request.user
-        product_id=request.GET.get("prod_id")
-        product=Product.objects.get(pk=product_id)
-        Cart.objects.filter(user=user,product=product).delete()
-        products=Cart.objects.all().filter(id__in = product_id_in_cart)
-        products=Cart.objects.filter(user=user)
-        total = products.aggregate(Sum('product__discounted_price'))['product__discounted_price__sum']
-        product=Product.objects.all().get(pk=pk)
-        response = render(request, 'addtocart.html',{'products':products,'total':total,'product_count_in_cart':product_count_in_cart})
-        if total==0:
-            messages.success(request,'Cart is now empty... Add your Favourites Items on Cart!')
-            response = redirect("/cart")
-        else:
-            messages.success(request, product.title + ' Removed to Cart Successfully!')
-            response = redirect("/cart")
-        return response
+    user=request.user
+    product_id=request.GET.get("prod_id")
+    product=Product.objects.get(pk=product_id)
+    Cart.objects.filter(user=user,product=product).delete()
+    products=Cart.objects.filter(user=user)
+    total = products.aggregate(Sum('product__discounted_price'))['product__discounted_price__sum']
+    product=Product.objects.all().get(pk=pk)
+    response = render(request, 'addtocart.html',{'products':products,'total':total,'product_count_in_cart':product_count_in_cart})
+    if total==0:
+        messages.success(request,'Cart is now empty... Add your Favourites Items on Cart!')
+        response = redirect(request, "/cart")
+    else:
+        messages.success(request, product.title + ' Removed to Cart Successfully!')
+        response = redirect(request, "/cart")
+    return response
  
     
 @login_required(login_url="/login")
@@ -880,7 +875,5 @@ def download_invoice_view(request,pk):
         'productRev':order.product.review,
         'productPrice':order.product.discounted_price,
         'productDescription':order.product.description,
-
-
     }
     return render_to_pdf('invoice.html',mydict)
