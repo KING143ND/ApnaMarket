@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+import uuid
+import datetime
 
 STATE_CHOICES = (
    ("unknown","unknown"),
@@ -183,7 +185,14 @@ class OrderPlaced (models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
     ordered_date = models.DateTimeField(auto_now_add=True)
+    order_id = models.CharField(max_length=20, unique=True, editable=False)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='Pending')
+    def save(self, *args, **kwargs):
+        if not self.order_id:
+            now = datetime.datetime.now()
+            self.order_id = now.strftime("OD%Y%m%dID%H%M%S")
+
+        super().save(*args, **kwargs)
     def __str__(self):
         return str(self.user)
     

@@ -10,16 +10,29 @@ from django.contrib.auth.forms import PasswordChangeForm
 
 def home(request):
     products=Product.objects.all().order_by("?")
-    mobiles=Product.objects.filter(category="M").order_by("?")
-    laptops=Product.objects.filter(category="L").order_by("?")
-    mfashion=Product.objects.filter(category="MF").order_by("?")
-    wfashion=Product.objects.filter(category="WF").order_by("?")
-    grocery=Product.objects.filter(category="G").order_by("?")
-    home=Product.objects.filter(category="H").order_by("?")
-    electronics=Product.objects.filter(category="E").order_by("?")
-    toys=Product.objects.filter(category="T").order_by("?")
-    medicine=Product.objects.filter(category="Md").order_by("?")
-    fashion=mfashion | wfashion
+    categories = {
+        'M': [],
+        'L': [],
+        'MF': [],
+        'WF': [],
+        'G': [],
+        'H': [],
+        'E': [],
+        'T': [],
+        'Md': []
+    }
+    for product in products:
+        categories[product.category].append(product)
+    mobiles = categories['M']
+    laptops = categories['L']
+    mfashion = categories['MF']
+    wfashion = categories['WF']
+    grocery = categories['G']
+    home = categories['H']
+    electronics = categories['E']
+    toys = categories['T']
+    medicine = categories['Md']
+    fashion = mfashion + wfashion
     if request.user.is_authenticated:
         product_count_in_cart=len(Cart.objects.filter(user=request.user))
     else:
@@ -33,8 +46,7 @@ def product_detail(request,title):
     else:
         product_count_in_cart=0
     products=Product.objects.filter(title = title)
-    allprod = Product.objects.all()
-    index_prod = {'allprod':allprod,'products':products,'product_count_in_cart':product_count_in_cart}
+    index_prod = {'products':products,'product_count_in_cart':product_count_in_cart}
     return render(request, 'productdetail.html', index_prod)
 
 
@@ -42,17 +54,17 @@ def product_detail(request,title):
 def add_to_cart(request,pk):
     user=request.user
     product_id=request.GET.get("prod_id")
-    product=Product.objects.get(pk=product_id)
-    Cart(user=user,product=product).save()
+    product=Product.objects.filter(pk=product_id).first()
+    Cart.objects.create(user=user,product=product)
     products=Product.objects.filter(pk = pk)
     if request.user.is_authenticated:
         product_count_in_cart=len(Cart.objects.filter(user=request.user))
     else:
         product_count_in_cart=1
-    product=Product.objects.get(pk=pk)
+    product_detail=Product.objects.get(pk=pk)
     response = render(request, 'productdetail.html',{'products':products,'product_count_in_cart':product_count_in_cart})
     response = render(request, 'addtocart.html')
-    messages.success(request, product.title + ' added to cart successfully!')
+    messages.success(request, product_detail.title + ' added to cart successfully!')
     response = redirect(f"/cart")
     if 'product_ids' in request.COOKIES:
         product_ids = request.COOKIES['product_ids']
@@ -94,30 +106,23 @@ def cart_view(request):
         total_price = products.aggregate(Sum('product__discounted_price'))['product__discounted_price__sum'] or 0
         product_price = products.aggregate(Sum('product__selling_price'))['product__selling_price__sum'] or 0
         
-        if total_price <= 99:
-            shipping_price = 99
-        elif total_price <= 199:
-            shipping_price = 95
-        elif total_price <= 299:
-            shipping_price = 89
-        elif total_price <= 399:
-            shipping_price = 85
-        elif total_price <= 499:
-            shipping_price = 79
-        elif total_price == 500:
-            shipping_price = 75
-        elif total_price <= 799:
-            shipping_price = 70
-        elif total_price <= 999:
-            shipping_price = 55
-        elif total_price == 1000:
-            shipping_price = 50
-        elif total_price <= 1499:
-            shipping_price = 25
-        elif total_price <= 1999:
-            shipping_price = 19
-        else:
-            shipping_price = 0
+        shipping_prices = {
+    99: 99,
+    199: 95,
+    299: 89,
+    399: 85,
+    499: 79,
+    500: 75,
+    799: 70,
+    999: 55,
+    1249: 50,
+    1499: 25,
+    1999: 19
+}
+        for price, shipping in shipping_prices.items():
+            if total_price <= price:
+                shipping_price = shipping
+                break
         
         if request.method == 'POST':  
             coupon = request.POST['coupon'] 
@@ -141,7 +146,6 @@ def cart_view(request):
         final_saving_price = product_price - total_price + coupon_price
         discount_pct = 125/45*100
     
-    print(final_price)
     context = {'products': products, 'saving_price': saving_price, 'product_price': product_price, 'total_price': total_price, 'shipping_price': shipping_price, 'final_price': final_price, 'coupon_price': coupon_price, 'discount_pct': discount_pct, 'applied_c_price': applied_c_price, 'product_count_in_cart': product_count_in_cart, 'coupon': coupon, 'coupon_code': coupon_code, 'coupon_code2': coupon_code2, 'cp_code': cp_code, 'final_saving_price': final_saving_price}
     return render(request, 'addtocart.html', context)
  
@@ -158,14 +162,14 @@ def remove_from_cart(request,pk):
     Cart.objects.filter(user=user,product=product).delete()
     products=Cart.objects.filter(user=user)
     total = products.aggregate(Sum('product__discounted_price'))['product__discounted_price__sum']
-    product=Product.objects.all().get(pk=pk)
+    product=Product.objects.get(pk=pk)
     response = render(request, 'addtocart.html',{'products':products,'total':total,'product_count_in_cart':product_count_in_cart})
     if total==0:
         messages.success(request,'Cart is now empty... Add your Favourites Items on Cart!')
-        response = redirect(request, "/cart")
+        response = redirect("/cart")
     else:
         messages.success(request, product.title + ' Removed to Cart Successfully!')
-        response = redirect(request, "/cart")
+        response = redirect("/cart")
     return response
  
     
@@ -176,15 +180,13 @@ def buy_now(request):
     product_id=request.GET.get("prod_id2")
     product=Product.objects.get(pk=product_id)
     Cart(user=user,product=product).save()
+    messages.success(request, product.title + ' added to cart successfully!')
     return redirect ("/checkout")
 
 
 @login_required(login_url="/login")
 def profile(request):
-    if request.user.is_authenticated:
-        product_count_in_cart=len(Cart.objects.filter(user=request.user))
-    else:
-        product_count_in_cart=0
+    product_count_in_cart=len(Cart.objects.filter(user=request.user))
     if request.method == 'POST':
         inputName = request.POST.get("inputName","default")
         inputEmail = request.POST.get("inputEmail","default")
@@ -252,10 +254,7 @@ def profile(request):
 
 @login_required(login_url="/login")
 def address(request):
-    if request.user.is_authenticated:
-        product_count_in_cart=len(Cart.objects.filter(user=request.user))
-    else:
-        product_count_in_cart=0
+    product_count_in_cart=len(Cart.objects.filter(user=request.user))
     profile=Customer.objects.filter(user=request.user)
     return render(request, 'address.html',{'profile':profile,'product_count_in_cart':product_count_in_cart})
 
@@ -273,7 +272,7 @@ def orders(request):
         product_count_in_cart=len(Cart.objects.filter(user=request.user))
     else:
         product_count_in_cart=0
-    op=OrderPlaced.objects.filter(user=request.user).order_by("ordered_date").reverse
+    op=OrderPlaced.objects.filter(user=request.user).order_by("ordered_date").reverse().select_related("product")
     return render(request, 'orders.html',{'product_count_in_cart':product_count_in_cart,'op':op})
 
 
@@ -293,7 +292,7 @@ def change_password(request):
         else:
             messages.error(request, 'Please correct the error below.')
     else:
-        form = PasswordChangeForm(request.user)
+        form = PasswordChangeForm(request.user, data=request.POST)
     return render(request, 'changepassword.html',{'product_count_in_cart':product_count_in_cart,'form': form})
 
 
@@ -303,7 +302,8 @@ def mobile(request,data=None):
     else:
         product_count_in_cart=0
        
-    mob_brand= data=='Oneplus' or data=='Apple' or data=='Samsung' or data=='Vivo' or data=='Oppo' or data=='Redmi' or data=='Realme' or data=='Google'    
+    brand_list = ['Oneplus', 'Apple', 'Samsung', 'Vivo', 'Oppo', 'Redmi', 'Realme', 'Google']
+    mob_brand = data in brand_list   
     if data==None:
         mobiles=Product.objects.filter(category="M").order_by('?').reverse()   
     elif mob_brand:
@@ -334,29 +334,24 @@ def laptop(request,data=None):
         product_count_in_cart=len(Cart.objects.filter(user=request.user))
     else:
         product_count_in_cart=0
-    lap_brand= data=='Acer' or data=='Apple' or data=='HP' or data=='Lenovo' or data=='Asus' or data=='Dell' or data=='MSI' or data=='Samsung'    
-    if data==None:
-        laptops=Product.objects.filter(category="L").order_by('?').reverse()
-    elif lap_brand:
+    valid_brands = ['Acer', 'Apple', 'HP', 'Lenovo', 'Asus', 'Dell', 'MSI', 'Samsung']
+    lap_brand = data in valid_brands    
+    querysets = {
+        None: Product.objects.filter(category="L").order_by('?').reverse(),
+        'low_to_high': Product.objects.filter(category="L").order_by('discounted_price'),
+        'high_to_low': Product.objects.filter(category="L").order_by('discounted_price').reverse(),
+        'customer_rating': Product.objects.filter(category="L").order_by('rating').reverse(),
+        'customer_review': Product.objects.filter(category="L").order_by('review').reverse(),
+        'below_20000': Product.objects.filter(category="L").filter(discounted_price__lt=20000).order_by('discounted_price').reverse(),
+        'below_30000': Product.objects.filter(category="L").filter(discounted_price__lte=30000).order_by('discounted_price').reverse(),
+        'below_40000': Product.objects.filter(category="L").filter(discounted_price__lte=40000).order_by('discounted_price').reverse(),
+        'below_50000': Product.objects.filter(category="L").filter(discounted_price__lt=50000).order_by('discounted_price').reverse(),
+        'above_50000': Product.objects.filter(category="L").filter(discounted_price__gt=50000).order_by('discounted_price')
+    }
+    
+    laptops = querysets.get(data, Product.objects.filter(category="L"))
+    if lap_brand:
         laptops=Product.objects.filter(category="L").filter(brand=data)
-    elif data=='low_to_high':
-        laptops=Product.objects.filter(category="L").order_by('discounted_price')
-    elif data=='high_to_low':
-        laptops=Product.objects.filter(category="L").order_by('discounted_price').reverse()
-    elif data=='customer_rating':
-        laptops=Product.objects.filter(category="L").order_by('rating').reverse()
-    elif data=='customer_review':
-        laptops=Product.objects.filter(category="L").order_by('review').reverse()
-    elif data=='below_20000':
-        laptops=Product.objects.filter(category="L").filter(discounted_price__lt=20000).order_by('discounted_price').reverse()
-    elif data=='below_30000':
-        laptops=Product.objects.filter(category="L").filter(discounted_price__lte=30000).order_by('discounted_price').reverse()
-    elif data=='below_40000':
-        laptops=Product.objects.filter(category="L").filter(discounted_price__lte=40000).order_by('discounted_price').reverse()
-    elif data=='below_50000':
-        laptops=Product.objects.filter(category="L").filter(discounted_price__lt=50000).order_by('discounted_price').reverse()
-    else:
-        laptops=Product.objects.filter(category="L").filter(discounted_price__gt=50000).order_by('discounted_price')
     return render(request, 'laptop.html',{'laptops':laptops,'product_count_in_cart':product_count_in_cart})
 
 
@@ -365,7 +360,8 @@ def fashion_mens(request,data=None):
         product_count_in_cart=len(Cart.objects.filter(user=request.user))
     else:
         product_count_in_cart=0
-    mf_cat= data=='T-Shirts' or data=='Shirts' or data=='Winter_Wears' or data=='Blazers' or data=='Suits' or data=='Jeans' or data=='Trousers' or data=='Trackpants' or data=='Shoes' or data=='Slippers' or data=='Wallets' or data=='Watches' or data=='Sunglasses' or data=='Belts' or data=='Jewellery'   
+    categories = ['T-Shirts', 'Shirts', 'Winter_Wears', 'Blazers', 'Suits', 'Jeans', 'Trousers', 'Trackpants', 'Shoes', 'Slippers', 'Wallets', 'Watches', 'Sunglasses', 'Belts', 'Jewellery']
+    mf_cat = data in categories   
     if data==None:
         mens=Product.objects.filter(category="MF").order_by('?').reverse()
     elif mf_cat:
@@ -689,43 +685,20 @@ def checkout(request):
             products=Cart.objects.filter(user=user)
             coupons2=Coupon.objects.filter(code=coupon)
              
-            for p in products:
-                total_price=(total_price+(p.product.discounted_price))
-                product_price=(product_price+(p.product.selling_price))
+            total_price = products.aggregate(total_price=Sum('product__discounted_price'))['total_price'] or 0
+            product_price = products.aggregate(product_price=Sum('product__selling_price'))['product_price'] or 0
             for p in coupons2:
                 coupon_price=(p.discount)
-            if total_price<=99:
-                shipping_price=99
-            elif total_price<=199:
-                shipping_price=95
-            elif total_price<=299:
-                shipping_price=89
-            elif total_price<=399:
-                shipping_price=85
-            elif total_price<=499:
-                shipping_price=79
-            elif total_price==500:
-                shipping_price=75
-            elif total_price<=799:
-                shipping_price=70
-            elif total_price<=999:
-                shipping_price=55
-            elif total_price==1000:
-                shipping_price=50
-            elif total_price<=1499:
-                shipping_price=25
-            elif total_price<=1999:
-                shipping_price=19
-            else:
-                shipping_price=0
+            price_ranges = [(99, 99), (199, 95), (299, 89), (399, 85), (499, 79), (500, 75), (799, 70), (999, 55), (1249, 50), (1499, 25), (1999, 19)]
+            for price_range, price in price_ranges:
+                if total_price <= price_range:
+                    shipping_price = price
+                    break
             if request.method == 'POST':  
                 coupon = request.POST['coupon'] 
                 cp_code=Coupon.objects.filter(code=coupon)
                 if cp_code:
                     for p in Coupon.objects.filter(code=coupon):
-                        print(p.discount)
-                        print(int((p.discount*10/100)+p.discount))
-                        print(total_price)
                         if int((p.discount*10/100)+p.discount)>(total_price):
                             messages.error(request,f"Add item worth Rs.{int((p.discount*10/100)+p.discount)-total_price} in your Cart for Applying Coupon {coupon}")
                         else:
@@ -862,18 +835,42 @@ def render_to_pdf(template_src, context_dict):
 
 def download_invoice_view(request,pk):
     order=OrderPlaced.objects.get(id=pk)
+    shipping_prices = {
+    99: 99,
+    199: 95,
+    299: 89,
+    399: 85,
+    499: 79,
+    500: 75,
+    799: 70,
+    999: 55,
+    1249: 50,
+    1499: 25,
+    1999: 19
+}
+    for price, shipping in shipping_prices.items():
+        if order.product.discounted_price > 1999:
+            shipping_price = 0
+        elif order.product.discounted_price <= price:
+            shipping_price = shipping
+            break
     mydict={
         'orderDate':order.ordered_date,
+        'orderID':order.order_id,
         'customerName':request.user,
         'customerEmail':request.user.email,
         'customerMobile':order.customer.phone,
         'shipmentAddress':order.customer.locality,
         'orderStatus':order.status,
-
         'productName':order.product.title,
         'productRat':order.product.rating,
         'productRev':order.product.review,
         'productPrice':order.product.discounted_price,
+        'totalPrice':order.product.selling_price,
+        'delPrice':shipping_price,
+        'discPrice':f'{order.product.selling_price-order.product.discounted_price}',
+        'discPct':f'{(order.product.selling_price-order.product.discounted_price)/order.product.selling_price*100}',
+        'finalPrice':order.product.discounted_price+shipping_price,
         'productDescription':order.product.description,
     }
     return render_to_pdf('invoice.html',mydict)

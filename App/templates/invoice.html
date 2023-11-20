@@ -16,6 +16,9 @@
     font-family: 'Bacasime Antique', serif;
     font-weight: 500;
   }
+  b {
+    color:#0b6bcb;
+  }
   .invoice-box {
     max-width: 800px;
     margin: auto;
@@ -109,6 +112,18 @@
   .rtl table tr td:nth-child(2) {
     text-align: left;
   }
+  .orderpd {
+    padding-bottom: -9px;
+  }
+  .orderpd2 {
+    padding-bottom: -9px;
+    text-align:right;
+  }
+  .orderpd3 {
+    color:red;
+    padding-bottom: -9px;
+    text-align:right;
+  }
 </style>
 
 <div class="container" >
@@ -122,12 +137,13 @@
           <table class="table table-bordered table-striped">
             <tr>
               <td class="title">
-                <div><a href="apnamarket.site">ApnaMarket - Invoice</a></div>
+                <div><a href="https://apnamarket.site">ApnaMarket - Invoice</a></div>
               </td>
 
               <td>
 
-                <h3>Order Date: {{orderDate}}</h3>
+                <h3 class='orderpd'>Order ID: {{orderID}}</h3>
+                <h3 class='orderpd'>Order Date: {{orderDate}}</h3>
                 
 
               </td>
@@ -141,14 +157,14 @@
           <table>
             <tr>
               <td>
-                Customer : {{customerName}}<br><br>
-                Customer Email: {{customerEmail}}
+                <b>Customer :</b> {{customerName}}<br><br>
+                <b>Customer Email:</b> {{customerEmail}}
 
               </td>
 
               <td>
-                Contact Number : {{customerMobile}}<br><br>
-                  Shipment Address :<br> {{shipmentAddress}}
+                <b>Contact Number :</b> {{customerMobile}}<br><br>
+                  <b>Shipment Address :</b> {{shipmentAddress}}
 
               </td>
             </tr>
@@ -162,15 +178,15 @@
           <table>
             <tr>
               <td>
-                Product: {{productName}}<br><br>
-                Product  Rating: {{productRat}}
+                <b>Product:</b> {{productName}}<br><br>
+                  <b>Product  Rating:</b> {{productRat}}
                 <br>
-                Product  Review: {{productRev}}
+                <b>Product  Review:</b> {{productRev}}
                 
               </td>
               <td>
-                Product Price : Rs.{{productPrice}}<br><br>
-                Description:  
+                <b>Product Price :</b> Rs.{{totalPrice}}<br><br>
+                  <b>Description:</b>  
                 {% if productDescription|length > 200 %}
                 {{productDescription|slice:"0:200"}}...
                 {% else %}
@@ -190,14 +206,40 @@
           <table>
             <tr>
               <td>
-                Order Status : 
+                <b>Order Status :</b> 
                   {{orderStatus}}
               </td>
             </tr>
           </table>
         </td>
       </tr>
+      <tr class="top">
+        <td colspan="2">
+          <table class="table table-bordered table-striped">
+            <tr>
+              <td class="title">
+                <div><a><b>Grand Total</b></a></div>
+              </td>
 
+              <td>
+
+                <h6 class='orderpd2'>Maximum Retail Price: Rs.{{totalPrice}}</h6>
+                <h5 class='orderpd2'>Discounted Price: Rs.{{productPrice}}</h5>
+                <h5 class='orderpd2'>Total Discount: Rs.{{discPrice}}</h5>
+                <h4 class='orderpd2'>Discount in Percent: {{discPct|floatformat:2}}%</h4>
+                {% if delPrice == 0 %}
+                <h5 class='orderpd2'>Shipping Price: Free</h5>
+                {% else %}
+                <h5 class='orderpd2'>Shipping Price: Rs.{{delPrice}}</h5>
+                {% endif %}
+                <h1 class='orderpd3'>Final Price: Rs.{{finalPrice}}</h1>
+                
+
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
 
       
 

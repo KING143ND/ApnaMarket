@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Buy Now{% endblock title %}
+{% block title %}My Orders{% endblock title %}
 {% block main-content %}
 <div class="container my-5">
  <div class="row">
@@ -30,18 +30,14 @@
               <label class="text-primary">Product Price: </label>
               <span class="my-2 mx-2">₹{{p.product.discounted_price}}</span>
               <br>
+              <label class="text-primary">Order ID: </label>
+              <span class="my-2 mx-2">{{p.order_id}}{{p.id}}</span>
+              <br>
               <label class="text-primary">Order Date & Time: </label>
               <span class="my-2 mx-2">{{p.ordered_date}}</span>
               <br>
               <label class="text-primary">Customer Name: </label>
               <span class="my-2 mx-2">{{p.customer.name}}</span>
-              <br>
-              <label class="text-primary">Customer Address: </label>
-              {% if p.customer.locality|length > 125 %}
-              <span class="mb-2 small">{{p.customer.locality|slice:"0:125"}}...</span>
-              {% else  %}
-              <span class="mb-2 small">{{p.customer.locality}}</span>
-              {% endif %}
               <br>
               <div><a style="text-decoration:none;" href="download-invoice/{{p.id}}" ><button class="btn btn-warning btn-sm mt-2">Download Invoice</button></a></div>
           </div>

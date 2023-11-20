@@ -77,10 +77,20 @@ WSGI_APPLICATION = 'ApnaMarket.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
+    #========================== Sqlite3 database ==========================
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+    #========================== Postgresql databse ==========================
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'NAME': 'apnadb',
+    #     'USER': 'naveen',
+    #     'PASSWORD': 'king143nd',
+    #     'HOST': '127.0.0.1',
+    #     'PORT': '5432',
+    # }
 }
 
 
