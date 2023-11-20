@@ -85,9 +85,9 @@ DATABASES = {
     #========================== Postgresql databse ==========================
     # 'default': {
     #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': 'apnadb',
-    #     'USER': 'naveen',
-    #     'PASSWORD': 'king143nd',
+    #     'NAME': 'database_name',
+    #     'USER': 'database_username',
+    #     'PASSWORD': 'database_password',
     #     'HOST': '127.0.0.1',
     #     'PORT': '5432',
     # }
