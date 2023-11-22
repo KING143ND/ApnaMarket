@@ -822,17 +822,19 @@ from django.template.loader import get_template
 from django.template import Context
 from django.http import HttpResponse
 
+from django.http import HttpResponse
+from django.template.loader import get_template
+from xhtml2pdf import pisa
 
-def render_to_pdf(template_src, context_dict):
+def render_to_pdf(request,template_src, context_dict):
     template = get_template(template_src)
     html  = template.render(context_dict)
-    result = io.BytesIO()
-    pdf = pisa.pisaDocument(io.BytesIO(html.encode("ISO-8859-1")), result)
-    if not pdf:
-        return 
-    else:
-        return HttpResponse(result.getvalue(), content_type='application/pdf')
-
+    response = HttpResponse(content_type='application/pdf')
+    pisaStatus = pisa.CreatePDF(html, dest=response)
+    if not pisaStatus.error:
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
+    
 def download_invoice_view(request,pk):
     order=OrderPlaced.objects.get(id=pk)
     shipping_prices = {
@@ -848,6 +850,7 @@ def download_invoice_view(request,pk):
     1499: 25,
     1999: 19
 }
+    shipping_price = 0 
     for price, shipping in shipping_prices.items():
         if order.product.discounted_price > 1999:
             shipping_price = 0
@@ -873,4 +876,4 @@ def download_invoice_view(request,pk):
         'finalPrice':order.product.discounted_price+shipping_price,
         'productDescription':order.product.description,
     }
-    return render_to_pdf('invoice.html',mydict)
+    return render_to_pdf(request,'invoice.html', mydict)
