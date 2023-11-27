@@ -17,7 +17,7 @@ class CartModelAdmin(admin.ModelAdmin):
     
 @admin.register(OrderPlaced)
 class OrderPlacedModelAdmin(admin.ModelAdmin):
-    list_display =['customer','order_id','user','product','ordered_date','status']
+    list_display =['customer','order_id','user','ordered_date','status']
     search_fields = ['order_id']
     
 @admin.register(Contact)

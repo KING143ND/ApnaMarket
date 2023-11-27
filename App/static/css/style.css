@@ -264,14 +264,14 @@ body {
 
 .cart-price {
     display: inline-block;
-    font-size: 24px;
+    font-size: 16px;
     font-weight: 300;
     color: #000000;
 }
 
 .cart-price2 {
     text-decoration: line-through;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 500;
     color: #878787;
     margin-left: 2px;

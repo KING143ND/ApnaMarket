@@ -85,9 +85,9 @@ DATABASES = {
     #========================== Postgresql databse ==========================
     # 'default': {
     #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': 'database-name',
-    #     'USER': 'username',
-    #     'PASSWORD': 'database-password',
+    #     'NAME': '',
+    #     'USER': '',
+    #     'PASSWORD': '',
     #     'HOST': '127.0.0.1',
     #     'PORT': '5432',
     # }
@@ -137,6 +137,10 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-MEDIA_ROOT =os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+if DEBUG:
+  STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+else:
+  STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

@@ -1,8 +1,8 @@
+<title>Invoice - {{orderID}} | {{productName}}</title>
 <style>
   @page {
     size: A4;
     margin: 1cm;
-
     @frame footer {
       -pdf-frame-content: footerContent;
       bottom: 0cm;
@@ -31,84 +31,68 @@
     font-weight: 400;
     color: black;
   }
-
   .invoice-box table {
     width: 100%;
     line-height: inherit;
     text-align: left;
   }
-
   .invoice-box table td {
     padding: 5px;
     vertical-align: top;
   }
-
   .invoice-box table tr td:nth-child(2) {
     text-align: right;
   }
-
   .invoice-box table tr.top table td {
     padding-bottom: 10px;
   }
-
   .invoice-box table tr.top table td.title a {
     font-size: 26px;
     line-height: 45px;
     color: #000;
     text-decoration: none;
   }
-
   .invoice-box table tr.information table td {
     padding-bottom: 5px;
   }
-
   .invoice-box table tr.heading td {
     background: #eee;
     border-bottom: 1px solid #ddd;
     font-weight: bold;
   }
-
   .invoice-box table tr.details td {
     padding-bottom: 20px;
   }
-
   .invoice-box table tr.item td {
     border-bottom: 1px solid #eee;
   }
-
   .invoice-box table tr.item.last td {
     border-bottom: none;
   }
-
   .invoice-box table tr.total td:nth-child(2) {
     border-top: 2px solid #eee;
     font-weight: bold;
   }
-
   @media only screen and (max-width: 600px) {
     .invoice-box table tr.top table td {
       width: 100%;
       display: block;
       text-align: center;
     }
-
     .invoice-box table tr.information table td {
       width: 100%;
       display: block;
       text-align: center;
     }
   }
-
   /** RTL **/
   .rtl {
     direction: rtl;
     font-family: 'Bacasime Antique', sans-serif;
   }
-
   .rtl table {
     text-align: right;
   }
-
   .rtl table tr td:nth-child(2) {
     text-align: left;
   }
@@ -121,14 +105,12 @@
   }
   .orderpd3 {
     color:red;
-    padding-bottom: -9px;
     text-align:right;
   }
 </style>
 
 <div class="container" >
  <div class="row my-3">
-
 <br>
   <div class="invoice-box">
     <table cellpadding="0" cellspacing="0">
@@ -139,75 +121,60 @@
               <td class="title">
                 <div><a href="https://apnamarket.site">ApnaMarket - Invoice</a></div>
               </td>
-
               <td>
-
                 <h3 class='orderpd'>Order ID: {{orderID}}</h3>
                 <h3 class='orderpd'>Order Date: {{orderDate}}</h3>
-                
-
               </td>
             </tr>
           </table>
         </td>
       </tr>
-
       <tr class="information">
         <td colspan="2">
           <table>
             <tr>
               <td>
-                <b>Customer :</b> {{customerName}}<br><br>
+                <b>Customer :</b> {{customerName}}<br>
                 <b>Customer Email:</b> {{customerEmail}}
-
               </td>
-
               <td>
-                <b>Contact Number :</b> {{customerMobile}}<br><br>
+                <b>Contact Number :</b> {{customerMobile}}<br>
                   <b>Shipment Address :</b> {{shipmentAddress}}
-
               </td>
             </tr>
           </table>
         </td>
       </tr>
-
-
       <tr class="information">
         <td colspan="2">
           <table>
             <tr>
               <td>
-                <b>Product:</b> {{productName}}<br><br>
-                  <b>Product  Rating:</b> {{productRat}}
-                <br>
-                <b>Product  Review:</b> {{productRev}}
-                
-              </td>
-              <td>
-                <b>Product Price :</b> Rs.{{totalPrice}}<br><br>
-                  <b>Description:</b>  
+                <b>Product:</b> {{productName}}<br>
+                <b>Description:</b>  
                 {% if productDescription|length > 200 %}
                 {{productDescription|slice:"0:200"}}...
                 {% else %}
                 {{productDescription}}
-                {% endif %}
+                {% endif %}                            
               </td>
-
+              <td>
+                <b>Product Price (1 tem) :</b> Rs.{{singleProductPrice}}<br>
+                <b>Product Quantity :</b> {{productQtd}}<br>
+                <b>Product  Rating:</b> {{productRat}}<br>
+                <b>Product  Review:</b> {{productRev}}
+              </td>
             </tr>
           </table>
         </td>
       </tr>
-
-
-
       <tr class="information">
         <td colspan="2">
           <table>
             <tr>
-              <td>
-                <b>Order Status :</b> 
-                  {{orderStatus}}
+              <td class="title">
+                <div><b>Order Status :</b> 
+                {{orderStatus}}</div>
               </td>
             </tr>
           </table>
@@ -220,33 +187,23 @@
               <td class="title">
                 <div><a><b>Grand Total</b></a></div>
               </td>
-
               <td>
-
                 <h6 class='orderpd2'>Maximum Retail Price: Rs.{{totalPrice}}</h6>
-                <h5 class='orderpd2'>Discounted Price: Rs.{{productPrice}}</h5>
-                <h5 class='orderpd2'>Total Discount: Rs.{{discPrice}}</h5>
-                <h4 class='orderpd2'>Discount in Percent: {{discPct|floatformat:2}}%</h4>
+                <h6 class='orderpd2'>Discounted Price: Rs.{{productPrice}}</h6>
+                <h6 class='orderpd2'>Total Discount: Rs.{{discPrice}}</h6>
+                <h6 class='orderpd2'>Discount in Percent: {{discPct|floatformat:2}}%</h6>
                 {% if delPrice == 0 %}
-                <h5 class='orderpd2'>Shipping Price: Free</h5>
+                <h6 class='orderpd2'>Shipping Price: Free</h6>
                 {% else %}
-                <h5 class='orderpd2'>Shipping Price: Rs.{{delPrice}}</h5>
+                <h6 class='orderpd2'>Shipping Price: Rs.{{delPrice}}</h6>
                 {% endif %}
                 <h1 class='orderpd3'>Final Price: Rs.{{finalPrice}}</h1>
-                
-
               </td>
             </tr>
           </table>
         </td>
       </tr>
-
-      
-
-
     </table>
-  </div>
-
-  
+  </div> 
 </div>
 </div>
