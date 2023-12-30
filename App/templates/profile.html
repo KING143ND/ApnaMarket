@@ -16,94 +16,61 @@
     {% csrf_token %}
     <div class="col-md-6">
       <label for="inputName" class="form-label mt-2">Name</label>
-      <input type="text" class="form-control" id="inputName" name='inputName' placeholder="Full Name">
+      <input type="text" class="form-control" id="inputName" value='{{inputName}}' name='inputName' placeholder="Full Name">
     </div>
     <div class="col-md-6">
       <label for="inputEmail" class="form-label mt-2">Email</label>
-      <input type="email" class="form-control" id="inputEmail" name='inputEmail' placeholder="name@example.com">
+      <input type="email" class="form-control" id="inputEmail" value='{{inputEmail}}' name='inputEmail' placeholder="name@example.com">
     </div>
     <div class="col-12">
       <label for="inputAddress" class="form-label mt-2">Address</label>
-      <input type="text" class="form-control" id="inputAddress" name="inputAddress"  placeholder="Address (Area & Street)">
+      <input type="text" class="form-control" id="inputAddress" value='{{inputAddress}}' name="inputAddress"  placeholder="Address (Area & Street)">
     </div>
     <div class="col-12">
       <label for="inputAddress2" class="form-label mt-2">Landmark (Optional)</label>
-      <input type="text" class="form-control" id="inputAddress2" name="inputAddress2" placeholder="Eg. Near Green Park">
+      <input type="text" class="form-control" id="inputAddress2" value='{{inputAddress2}}' name="inputAddress2" placeholder="Eg. Near Green Park">
     </div>
     <div class="col-md-4">
       <label for="inputCity" class="form-label mt-2">City</label>
-      <input type="text" class="form-control" id="inputCity" name="inputCity" placeholder="City/District/Town">
+      <input type="text" class="form-control" id="inputCity" value='{{inputCity}}' name="inputCity" placeholder="City/District/Town">
     </div>
     <div class="col-md-5">
       <label for="inputState" class="form-label mt-2">State</label>
       <select id="inputState" class="form-select" name="inputState">
         <option selected disabled>Choose...</option>
-        <option>Andaman and Nicobar Islands</option>
-        <option>Andhra Pradesh</option>
-        <option>Arunachal Pradesh</option>
-        <option>Assam</option>
-        <option>Bihar</option>
-        <option>Chhattisgarh</option>
-        <option>Chandigarh</option>
-        <option>Dadra and Nagar Haveli</option>
-        <option>Daman and Diu</option>
-        <option>Delhi</option>
-        <option>Goa</option>
-        <option>Gujarat</option>
-        <option>Haryana</option>
-        <option>Himachal Pradesh</option>
-        <option>Jammu and Kashmir</option>
-        <option>Jharkhand</option>
-        <option>Karnataka</option>
-        <option>Kerala</option>
-        <option>Ladakh</option>
-        <option>Lakshadweep</option>
-        <option>Madhya Pradesh</option>
-        <option>Maharashtra</option>
-        <option>Manipur</option>
-        <option>Meghalaya</option>
-        <option>Mizoram</option>
-        <option>Nagaland</option>
-        <option>Odisha</option>
-        <option>Punjab</option>
-        <option>Pondicherry</option>
-        <option>Rajasthan</option>
-        <option>Sikkim</option>
-        <option>Tamil Nadu</option>
-        <option>Telangana</option>
-        <option>Tripura</option>
-        <option>Uttar Pradesh</option>
-        <option>Uttarakhand</option>
-        <option>West Bengal</option>
+        {% for state_option in states %}
+            <option value="{{ state_option }}" {% if state_option == inputState %} selected {% endif %}>{{ state_option }}</option>
+        {% endfor %}
       </select>
     </div>
     <div class="col-md-3">
       <label for="inputZip" class="form-label mt-2">Pincode</label>
-      <input type="number" class="form-control" id="inputZip" name="inputZip" placeholder="6 Digits [0-9]">
+      <input type="number" class="form-control" id="inputZip" value='{{inputZip}}' name="inputZip" placeholder="6 Digits [0-9]">
     </div>
     <div class="col-md-3">
       <label for="inputGender" class="form-label mt-2">Gender</label>
       <select id="inputGender" class="form-select" name="inputGender">
         <option selected disabled>Choose...</option>
-        <option>Male</option>
-        <option>Female</option>
-        <option>Not Specified</option>
+        {% for gender_option in gender %}
+            <option value="{{ gender_option }}" {% if gender_option == inputGender %} selected {% endif %}>{{ gender_option }}</option>
+        {% endfor %}
       </select>
     </div>
     <div class="col-md-4">
       <label for="inputPhone" class="form-label mt-2">Mobile Number</label>
-      <input type="tel" class="form-control" id="inputPhone" name="inputPhone" placeholder="10-digit Mobile Number">
+      <input type="tel" class="form-control" id="inputPhone" value='{{inputPhone}}' name="inputPhone" placeholder="10-digit Mobile Number">
     </div>
     <div class="col-md-2">
       <label for="inputAge" class="form-label mt-2">Age (Optional)</label>
-      <input type="number" class="form-control" id="inputAge" name="inputAge" placeholder="Eg. 24" default=0>
+      <input type="number" class="form-control" id="inputAge" value='{{inputAge}}' name="inputAge" placeholder="Eg. 24" default=0>
     </div>
     <div class="col-md-3">
       <label for="inputType" class="form-label mt-2">Address Type</label>
       <select id="inputType" class="form-select" name="inputType">
         <option selected disabled>Choose...</option>
-        <option>Home</option>
-        <option>Work</option>
+        {% for address_option in address %}
+            <option value="{{ address_option }}" {% if address_option == inputType %} selected {% endif %}>{{ address_option }}</option>
+        {% endfor %}
       </select>
     </div>
     <div class="col-md-12 mt-3">

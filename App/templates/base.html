@@ -20,7 +20,9 @@
 
     <!--Custom CSS-->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="sweetalert2.min.css">
 
     <title>{% block title %} {% endblock title %} </title>
 
@@ -79,8 +81,8 @@
                         {% if user.is_authenticated %}
                         <li class="nav-item dropdown mx-2">
                             <a class="nav-link dropdown-toggle text-white" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Welcome {{request.user}}
-                 </a>
+                            Welcome {{request.user}}
+                            </a>
                             <ul class="dropdown-menu" aria-labelledby="profileDropdown">
                         {% if user.is_superuser %}
                         <li><a class="dropdown-item" href="/admin">Admin</a></li>
@@ -113,10 +115,36 @@
         </div>
     </nav>
     {% for message in messages %}
-    <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+    {% comment %} <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
         <div class="text-center mx-4">{{ message }}</div>
         <button type="button" class="btn-close text-white" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+    </div> {% endcomment %}
+    <style>
+        .sweet_alert {
+            {% comment %} background: linear-gradient(170deg, rgb(40, 205, 255) 15%, rgba(226, 231, 231, 0.862), rgb(201, 25, 255) 110%);; {% endcomment %}
+            border: 4px solid rgb(0, 0, 0);
+            border-radius: 15px;
+        }
+        .text-error {
+            color:#dc3545;
+        }
+    </style>
+    <script>
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: "px-4 btn alert-{{ message.tags }} border border-0",
+                popup: "sweet_alert aler-{{ message.tags }}",
+                title: "fw-normal p-0 text-{{ message.tags }} text-capitalize",
+            },
+            buttonsStyling: false
+        });
+        swalWithBootstrapButtons.fire({
+            title: '{{ message.tags }}',
+            html: '<span class="fs-1 m-0 ext-{{message.tags}}">{{ message }}</span>',
+            icon: '{{ message.tags }}',
+            confirmButtonText: 'OK', 
+        });
+    </script>    
     {% endfor %} {% block banner_slider %} {% endblock banner_slider %} {% block livesale %} {% endblock livesale %} {% block main-content %} {% endblock main-content %}
 
     <!-- Start Footer -->

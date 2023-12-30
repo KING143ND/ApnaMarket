@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-pvlhv$dbbmnrygf(b5=zr1q6_y83vry^r-5jz+#4^t7dbwxwl%"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -78,19 +78,19 @@ WSGI_APPLICATION = 'ApnaMarket.wsgi.application'
 
 DATABASES = {
     #========================== Sqlite3 database ==========================
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-    #========================== Postgresql databse ==========================
     # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': '',
-    #     'USER': '',
-    #     'PASSWORD': '',
-    #     'HOST': '127.0.0.1',
-    #     'PORT': '5432',
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
     # }
+    #========================== Postgresql databse ==========================
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'ApnaMarketDB',
+        'USER': 'naveen',
+        'PASSWORD': 'king143nd',
+        'HOST': 'localhost',  
+        'PORT': '5432', 
+    }
 }
 
 

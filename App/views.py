@@ -3,7 +3,7 @@ from . models import *
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages, auth
-from django.db.models import Sum
+from django.db.models import Q
 from django.contrib.auth import update_session_auth_hash 
 from django.contrib.auth.forms import PasswordChangeForm
 from xhtml2pdf import pisa
@@ -218,75 +218,159 @@ def buy_now(request):
 @login_required(login_url="/login")
 def profile(request):
     product_count_in_cart=len(Cart.objects.filter(user=request.user))
+    states = [
+        'Andaman and Nicobar Islands',
+        'Andhra Pradesh',
+        'Arunachal Pradesh',
+        'Assam',
+        'Bihar',
+        'Chhattisgarh',
+        'Chandigarh',
+        'Dadra and Nagar Haveli',
+        'Daman and Diu',
+        'Delhi',
+        'Goa',
+        'Gujarat',
+        'Haryana',
+        'Himachal Pradesh',
+        'Jammu and Kashmir',
+        'Jharkhand',
+        'Karnataka',
+        'Kerala',
+        'Ladakh',
+        'Lakshadweep',
+        'Madhya Pradesh',
+        'Maharashtra',
+        'Manipur',
+        'Meghalaya',
+        'Mizoram',
+        'Nagaland',
+        'Odisha',
+        'Punjab',
+        'Pondicherry',
+        'Rajasthan',
+        'Sikkim',
+        'Tamil Nadu',
+        'Telangana',
+        'Tripura',
+        'Uttar Pradesh',
+        'Uttarakhand',
+        'West Bengal',
+    ]
+    gender = [
+        'Male',
+        'Female',
+        'Not Specified',
+    ]
+    address = [
+        'Home',
+        'Work',
+    ]
     if request.method == 'POST':
-        inputName = request.POST.get("inputName","default")
-        inputEmail = request.POST.get("inputEmail","default")
-        inputAddress = request.POST.get("inputAddress","default")
-        inputAddress2 = request.POST.get("inputAddress2","default")
-        inputCity = request.POST.get("inputCity","default")
-        inputState = request.POST.get("inputState","default")
-        inputZip = request.POST.get("inputZip","default")
-        inputGender = request.POST.get("inputGender","default")
-        inputPhone = request.POST.get("inputPhone","default")
-        inputAge = request.POST.get("inputAge","default")
-        inputType = request.POST.get("inputType","default")
-        if inputAge=='':
-            inputAge='13'
- 
+        inputName = request.POST.get("inputName","").title()
+        inputEmail = request.POST.get("inputEmail","").lower()
+        inputAddress = request.POST.get("inputAddress","").title()
+        inputAddress2 = request.POST.get("inputAddress2","").title()
+        inputCity = request.POST.get("inputCity","").title()
+        inputState = request.POST.get("inputState","")
+        inputZip = request.POST.get("inputZip","")
+        inputGender = request.POST.get("inputGender","")
+        inputPhone = request.POST.get("inputPhone","")
+        inputAge = request.POST.get("inputAge","")
+        inputType = request.POST.get("inputType","")
+        if not inputAge:
+            inputAge = None
+        else:
+            inputAge = int(inputAge)
+            
         if Customer.objects.filter(email=inputEmail).exists():
-            messages.error(request,"You already added this Email!") 
+            messages.warning(request,"You already added this Email!") 
         elif Customer.objects.filter(phone=inputPhone).exists():
-            messages.error(request,"You already added this Mobile Number!") 
+            messages.warning(request,"You already added this Mobile Number!") 
         elif len(inputName)==0:
-            messages.error(request, "Please Add Your Name!")  
+            messages.warning(request, "Please Add Your Name!")  
         elif len(inputEmail)==0:
-            messages.error(request, "Please Add Your Email!")  
+            messages.warning(request, "Please Add Your Email!")  
         elif len(inputAddress)==0:
-            messages.error(request, "Please Add Your Address!")  
+            messages.warning(request, "Please Add Your Address!")  
         elif len(inputCity)==0:
-            messages.error(request, "Please Add Your City!")    
+            messages.warning(request, "Please Add Your City!")    
         elif len(inputZip)==0:
-            messages.error(request, "Please Add Your Pincode!")   
+            messages.warning(request, "Please Add Your Pincode!")   
         elif len(inputName)<3:
-            messages.error(request, "Your Name cannot be less than 3 Characters!")
+            messages.warning(request, "Your Name cannot be less than 3 Characters!")
         elif len(inputName)>40:
-            messages.error(request, "Your Name cannot be greater than 40 Characters!")
-        elif len(inputEmail)<5:
-            messages.error(request, "Your Email cannot be less than 5 Characters!")
+            messages.warning(request, "Your Name cannot be greater than 40 Characters!")
+        elif len(inputEmail)<8:
+            messages.warning(request, "Your Email cannot be less than 8 Characters!")
         elif len(inputEmail)>50:
-            messages.error(request, "Your Email cannot be greater than 50 Characters!")
+            messages.warning(request, "Your Email cannot be greater than 50 Characters!")
         elif len(inputCity)<3:
-            messages.error(request, "Your City cannot be less than 3 Characters!")
+            messages.warning(request, "Your City cannot be less than 3 Characters!")
         elif len(inputCity)>50:
-            messages.error(request, "Your City cannot be greater than 50 Characters!")
+            messages.warning(request, "Your City cannot be greater than 50 Characters!")
         elif len(inputAddress)<3:
-            messages.error(request, "Your Address cannot be less than 3 Characters!")
+            messages.warning(request, "Your Address cannot be less than 3 Characters!")
         elif len(inputAddress)>200:
-            messages.error(request, "Your Address cannot be greater than 200 Characters!")
+            messages.warning(request, "Your Address cannot be greater than 200 Characters!")
         elif len(inputAddress2)>200:
-            messages.error(request, "Your Landmark cannot be greater than 200 Characters!")
+            messages.warning(request, "Your Landmark cannot be greater than 200 Characters!")
         elif len(inputZip)<6:
-            messages.error(request, "Your Pincode must be only 6 Characters!")
+            messages.warning(request, "Your Pincode must be only 6 Characters!")
         elif len(inputZip)>6:
-            messages.error(request, "Your Pincode must be only 6 Characters!")
-        elif inputAge<='12':
+            messages.warning(request, "Your Pincode must be only 6 Characters!")
+        elif inputAge is not None and inputAge <=12:
             messages.warning(request, f"Your Age {inputAge} is Underage for Our Website!")
-        elif inputAge>'80':
-            messages.error(request, f"Really Your Age is {inputAge}... Please check it again!")
+        elif inputAge is not None and inputAge >80:
+            messages.warning(request, f"Really Your Age is {inputAge}... Please check it again!")
         elif len(inputPhone)>10:
-            messages.error(request, "Your Mobile Number must be only 10 Digits!")
+            messages.warning(request, "Your Mobile Number must be only 10 Digits!")
         else:
             myuser = Customer.objects.create(user=request.user, name=inputName, email=inputEmail, locality=inputAddress, landmark=inputAddress2, city=inputCity, state=inputState, zipcode=inputZip, gender=inputGender, phone=inputPhone, age=inputAge, address=inputType)
             messages.success(request, f"Congratulations...{inputName}! Your Address has been Updated Sucessfully!")
             myuser.save()
             return redirect("/address")
-    return render(request, 'profile.html',{'product_count_in_cart':product_count_in_cart,'active':'btn-primary'})
+        context = {
+            "inputName":inputName,
+            "inputEmail":inputEmail,
+            "inputAddress":inputAddress,
+            "inputAddress2":inputAddress2,
+            "inputCity":inputCity,
+            "inputState":inputState,
+            "states": states,
+            "gender": gender,
+            "address": address,
+            "inputZip":inputZip,
+            "inputGender":inputGender,
+            "inputPhone":inputPhone,
+            "inputAge":inputAge,
+            "inputType":inputType,
+        }
+        return render(request, 'profile.html',context=context)
+    context = {
+        "inputName":"",
+        "inputEmail":"",
+        "inputAddress":"",
+        "inputAddress2":"",
+        "inputCity":"",
+        "inputState":"",
+        "states": states,
+        "gender": gender,
+        "address": address,
+        "inputZip":"",
+        "inputGender":"",
+        "inputPhone":"",
+        "inputAge":"",
+        "inputType":"",
+        'product_count_in_cart':product_count_in_cart,'active':'btn-primary'
+    }
+    return render(request, 'profile.html',context=context)
 
 
 @login_required(login_url="/login")
 def address(request):
     product_count_in_cart=len(Cart.objects.filter(user=request.user))
-    profile=Customer.objects.filter(user=request.user)
+    profile=Customer.objects.filter(user=request.user).order_by("pk")
     return render(request, 'address.html',{'profile':profile,'product_count_in_cart':product_count_in_cart})
 
 
@@ -294,7 +378,152 @@ def address_del(request,pk):
     customer=Customer.objects.get(pk=pk)
     customer.delete()
     messages.success(request, f"Your Address {customer} has been Deleted Sucessfully!")
-    return redirect("/")
+    return redirect("/address")
+
+
+def edit_address(request, pk):
+    customer = Customer.objects.get(pk=pk)
+    states = [
+        'Andaman and Nicobar Islands',
+        'Andhra Pradesh',
+        'Arunachal Pradesh',
+        'Assam',
+        'Bihar',
+        'Chhattisgarh',
+        'Chandigarh',
+        'Dadra and Nagar Haveli',
+        'Daman and Diu',
+        'Delhi',
+        'Goa',
+        'Gujarat',
+        'Haryana',
+        'Himachal Pradesh',
+        'Jammu and Kashmir',
+        'Jharkhand',
+        'Karnataka',
+        'Kerala',
+        'Ladakh',
+        'Lakshadweep',
+        'Madhya Pradesh',
+        'Maharashtra',
+        'Manipur',
+        'Meghalaya',
+        'Mizoram',
+        'Nagaland',
+        'Odisha',
+        'Punjab',
+        'Pondicherry',
+        'Rajasthan',
+        'Sikkim',
+        'Tamil Nadu',
+        'Telangana',
+        'Tripura',
+        'Uttar Pradesh',
+        'Uttarakhand',
+        'West Bengal',
+    ]
+    gender = [
+        'Male',
+        'Female',
+        'Not Specified',
+    ]
+    address = [
+        'Home',
+        'Work',
+    ]
+    if request.method == 'POST':
+        customer.name = request.POST.get('inputName', '')
+        customer.locality = request.POST.get('inputAddress', '')
+        customer.landmark = request.POST.get('inputAddress2', '')
+        customer.city = request.POST.get('inputCity', '')
+        customer.state = request.POST.get('inputState', '')
+        customer.zipcode = request.POST.get('inputZip', '')
+        customer.gender = request.POST.get('inputGender', '')
+        customer.phone = request.POST.get('inputPhone', '')
+        customer.email = request.POST.get('inputEmail', '')
+        customer.age = request.POST.get('inputAge', '')
+        customer.address = request.POST.get('inputType', '')
+        inputName = customer.name
+        inputEmail = customer.email
+        inputPhone = customer.phone
+        inputAddress = customer.locality
+        inputGender = customer.gender
+        inputCity = customer.city
+        inputZip = customer.zipcode
+        inputState = customer.state
+        inputAddress2 = customer.landmark
+        inputAge = customer.age
+        inputType = customer.address
+        if not inputAge:
+            inputAge = None
+        else:
+            inputAge = int(inputAge)
+            
+        if Customer.objects.filter(Q(email=inputEmail) & ~Q(pk=customer.pk)).exists():
+            messages.warning(request, "Email is already in used!")
+        elif Customer.objects.filter(Q(phone=inputPhone) & ~Q(pk=customer.pk)).exists():
+            messages.warning(request, "Phone number is already in used!")
+        elif len(inputName)==0:
+            messages.warning(request, "Please Add Your Name!")  
+        elif len(inputEmail)==0:
+            messages.warning(request, "Please Add Your Email!")  
+        elif len(inputAddress)==0:
+            messages.warning(request, "Please Add Your Address!")  
+        elif len(inputCity)==0:
+            messages.warning(request, "Please Add Your City!")    
+        elif len(inputZip)==0:
+            messages.warning(request, "Please Add Your Pincode!")   
+        elif len(inputName)<3:
+            messages.warning(request, "Your Name cannot be less than 3 Characters!")
+        elif len(inputName)>40:
+            messages.warning(request, "Your Name cannot be greater than 40 Characters!")
+        elif len(inputEmail)<8:
+            messages.warning(request, "Your Email cannot be less than 8 Characters!")
+        elif len(inputEmail)>50:
+            messages.warning(request, "Your Email cannot be greater than 50 Characters!")
+        elif len(inputCity)<3:
+            messages.warning(request, "Your City cannot be less than 3 Characters!")
+        elif len(inputCity)>50:
+            messages.warning(request, "Your City cannot be greater than 50 Characters!")
+        elif len(inputAddress)<3:
+            messages.warning(request, "Your Address cannot be less than 3 Characters!")
+        elif len(inputAddress)>200:
+            messages.warning(request, "Your Address cannot be greater than 200 Characters!")
+        elif len(inputAddress2)>200:
+            messages.warning(request, "Your Landmark cannot be greater than 200 Characters!")
+        elif len(inputZip)<6:
+            messages.warning(request, "Your Pincode must be only 6 Characters!")
+        elif len(inputZip)>6:
+            messages.warning(request, "Your Pincode must be only 6 Characters!")
+        elif inputAge is not None and inputAge <=12:
+            messages.warning(request, f"Your Age {inputAge} is Underage for Our Website!")
+        elif inputAge is not None and inputAge >80:
+            messages.warning(request, f"Really Your Age is {inputAge}... Please check it again!")
+        elif len(inputPhone)>10:
+            messages.warning(request, "Your Mobile Number must be only 10 Digits!")
+        else:
+            customer.name = inputName
+            customer.email = inputEmail
+            customer.phone = inputPhone
+            customer.locality = inputAddress
+            customer.landmark = inputAddress2
+            customer.city = inputCity
+            customer.state = inputState
+            customer.zipcode = inputZip
+            customer.gender = inputGender
+            customer.age = inputAge
+            customer.address = inputType
+            customer.save()
+            messages.success(request, f"Your Address {customer} has been Updated Successfully!")
+            return redirect("/address")
+
+    context = {
+        'customer': customer,
+        "states": states,
+        "gender": gender,
+        "address": address,
+        }
+    return render(request, 'edit_address.html', context)
 
 
 @login_required(login_url="/login")
@@ -593,82 +822,74 @@ def toys(request,data=None):
 
 def login(request):
     if request.method == 'POST':  
-        loginusername = request.POST['loginusername']
+        loginusername = request.POST['loginusername'].capitalize()
         loginpassword = request.POST['loginpassword']
         user = auth.authenticate(username = loginusername, password = loginpassword)
         if user is not None:
             auth.login(request,user)
             messages.success(request, f"Successfully Logged In.. Welcome {loginusername}!")
-            return redirect("/")
+            next_param = request.POST.get('next')
+            if next_param:
+                return redirect(next_param)
+            if next_param is None:
+                return redirect("/")
         else:
             messages.error(request,"Invalid Credentials!")
-            return redirect("/login")
-    return render(request, 'login.html')
+        context = {
+            'loginusername':loginusername,
+        }
+        return render(request, 'login.html', context=context)
+    context = {
+        'loginusername':'',
+    }
+    return render(request, 'login.html', context=context)
 
 
 def customerregistration(request):
     if request.method == 'POST':
-        fname = request.POST.get("fname","default")
-        lname = request.POST.get("lname","default")
-        username = request.POST.get("username","default")
-        email = request.POST.get("email","default")
-        pass1 = request.POST.get("pass1","default")
-        pass2 = request.POST.get("pass2","default")
+        fname = request.POST.get("fname","").capitalize()
+        lname = request.POST.get("lname","").capitalize()
+        username = request.POST.get("username","").capitalize()
+        email = request.POST.get("email","").lower()
+        pass1 = request.POST.get("pass1","")
+        pass2 = request.POST.get("pass2","")
         if pass1==pass2:
             if User.objects.filter(username = username).exists():
-                messages.error(request,"Username has been already taken!")
-                return redirect("/registration")
+                messages.warning(request,"Username has been already taken!")
             elif User.objects.filter(email = email).exists():
-                messages.error(request,"Email has been already taken!")
-                return redirect("/registration")
+                messages.warning(request,"Email has been already taken!")
             elif len(username)==0:
-                messages.error(request, "Your Username cannot be Empty!")
-                return redirect('/registration')
+                messages.warning(request, "Your Username cannot be Empty!")
             elif len(fname)==0:
-                messages.error(request, "Your First Name cannot be Empty!")
-                return redirect('/registration')
+                messages.warning(request, "Your First Name cannot be Empty!")
             elif len(lname)==0:
-                messages.error(request, "Your Last Name cannot be Empty!")
-                return redirect('/registration')
+                messages.warning(request, "Your Last Name cannot be Empty!")
             elif len(email)==0:
-                messages.error(request, "Your Email cannot be Empty!")
-                return redirect('/registration')
+                messages.warning(request, "Your Email cannot be Empty!")
             elif len(pass1)==0:
-                messages.error(request, "Your Password cannot be Empty!")
-                return redirect('/registration')
+                messages.warning(request, "Your Password cannot be Empty!")
             elif len(username)<3:
-                messages.error(request, "Your Username cannot be less than 3 Characters!")
-                return redirect('/registration')
+                messages.warning(request, "Your Username cannot be less than 3 Characters!")
             elif len(username)>15:
-                messages.error(request, "Your Username must be under 15 Characters!")
-                return redirect('/registration')
+                messages.warning(request, "Your Username must be under 15 Characters!")
             elif not username.isalnum():
-                messages.error(request, "Special Characters are not allowed!")
-                return redirect('/registration')
+                messages.warning(request, "Special Characters are not allowed!")
             elif len(fname)>30:
-                messages.error(request, "Your First Name must be under 30 Characters!")
-                return redirect('/registration')
+                messages.warning(request, "Your First Name must be under 30 Characters!")
             elif len(fname)<2:
-                messages.error(request, "Your First Name must be atleast 2 Characters!")
-                return redirect('/registration')
+                messages.warning(request, "Your First Name must be atleast 2 Characters!")
             elif len(lname)>30:
-                messages.error(request, "Your Last Name must be under 30 Characters!")
-                return redirect('/registration')
+                messages.warning(request, "Your Last Name must be under 30 Characters!")
             elif len(lname)<2:
-                messages.error(request, "Your Last Name must be atleast 2 Characters!")
-                return redirect('/registration')
+                messages.warning(request, "Your Last Name must be atleast 2 Characters!")
             elif len(email)<6:
-                messages.error(request, "Your Email must be atleast 6 Characters!")
-                return redirect('/registration')
+                messages.warning(request, "Your Email must be atleast 6 Characters!")
             elif len(email)>100:
-                messages.error(request, "Your Email must be under 100 Characters!")
-                return redirect('/registration')
+                messages.warning(request, "Your Email must be under 100 Characters!")
             elif len(pass1)<6:
-                messages.error(request, "Your Password must be atleast 6 Characters!")
-                return redirect('/registration')
+                messages.warning(request, "Your Password must be atleast 6 Characters!")
             elif len(pass1)>20:
-                messages.error(request, "Your Password must be atmost 20 Characters!")
-                return redirect('/registration')
+                messages.warning(request, "Your Password must be atmost 20 Characters!")
             else:
                 myuser = User.objects.create_user(username=username, email=email, password=pass1, first_name=fname, last_name=lname)
                 messages.success(request, f"Congratulations...{fname} {lname}! Your Account has been Created Sucessfully!")
@@ -677,9 +898,25 @@ def customerregistration(request):
                 auth.login(request,myuser)
                 return redirect("/")
         else:
-            messages.error(request,"Password do not Match!")
-            return redirect("/registration")
-    return render(request, 'customerregistration.html')
+            messages.error(request, "Password do not Match!")
+        context = {
+            'fname': fname,
+            'lname': lname,
+            'username': username,
+            'email': email,
+            'pass1': pass1,
+            'pass2': pass2,
+        }
+        return render(request, 'customerregistration.html', context=context)
+    context = {
+        'fname': '',
+        'lname': '',
+        'username': '',
+        'email': '',
+        'pass1': '',
+        'pass2': '',
+    }
+    return render(request, 'customerregistration.html', context=context)
 
 
 def logout(request):
@@ -787,7 +1024,7 @@ def payment(request):
             1499: 25,
             1999: 19
         }
-        for price, shipping in shipping_prices.items():
+        for price,shipping in shipping_prices.items():
             if total_price <= price:
                 shipping_price = shipping
                 break   
@@ -824,8 +1061,10 @@ def search(request):
     
     return render(request,"search.html", search_results)
 
+
 def about(request):
     return render(request,"about.html")
+
 
 def contact(request):
     if request.method=="POST":
@@ -880,20 +1119,25 @@ def contact(request):
             return redirect('/login')  
     return render(request, "contact.html")
 
+
 def terms(request):
     return render(request,"terms.html")
 
+
 def privacy(request):
     return render(request,"privacy.html")
+  
      
-def render_to_pdf(request,template_src, context_dict):
+def render_to_pdf(request,template_src, context_dict, filename):
     template = get_template(template_src)
     html  = template.render(context_dict)
     response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="{filename}"'
     pisaStatus = pisa.CreatePDF(html, dest=response)
     if not pisaStatus.error:
         return HttpResponse('We had some errors <pre>' + html + '</pre>')
     return response
+
     
 def download_invoice_view(request,pk):
     order=OrderPlaced.objects.get(id=pk)
@@ -918,4 +1162,7 @@ def download_invoice_view(request,pk):
         'finalPrice':(order.product.discounted_price*order.quantity)+order.shipping,
         'productDescription':order.product.description,
     }
-    return render_to_pdf(request,'invoice.html', mydict)
+    order_id = order.order_id
+    order_prod_id = order.product.pk
+    filename = f'ApnaMarket-{order_id}-{order_prod_id}.pdf'
+    return render_to_pdf(request,'invoice.html', mydict, filename)

@@ -64,8 +64,8 @@ class Customer (models.Model):
     city= models.CharField(max_length=50)
     zipcode= models.IntegerField()
     state = models.CharField(choices=STATE_CHOICES, max_length=50,default="unknown")
-    landmark = models.CharField(max_length=50,null=True)
-    age = models.PositiveIntegerField(default=0)
+    landmark = models.CharField(max_length=200,null=True)
+    age = models.PositiveIntegerField(null=True, blank=True, default=None)
     address = models.CharField(choices=Address_choices, max_length=15,default="unknown")
     
     def __str__(self):

@@ -10,34 +10,35 @@
    <hr>
 
    <form action="/registration/" method="post" novalidate class="my_form3 shadow p-5">
-      {% csrf_token %}
+    {% csrf_token %}
     <div class="mb-3">
      <h5 for="username" class="form-label">Username</h5>
-     <input type="text" class="form-control"  id="username" name="username" placeholder="Choose a unique username">
+     <input type="text" class="form-control"  id="username" value="{{ username }}" name="username" placeholder="Choose a unique username">
     </div>
     <div class="row">
-    <div class="mb-3 col-md-6">
-      <h5 for="fname" class="form-label">First Name</h5>
-      <input type="text" class="form-control"  id="fname" name="fname" placeholder="Enter your first name">
-     </div>
-     <div class="mb-3 col-md-6">
-      <h5 for="lname" class="form-label">Last Name</h5>
-      <input type="text" class="form-control"  id="lname" name="lname" placeholder="Enter your last name">
-     </div></div>
+      <div class="mb-3 col-md-6">
+        <h5 for="fname" class="form-label">First Name</h5>
+        <input type="text" class="form-control"  id="fname" name="fname" value="{{ fname }}" placeholder="Enter your first name">
+      </div>
+      <div class="mb-3 col-md-6">
+        <h5 for="lname" class="form-label">Last Name</h5>
+        <input type="text" class="form-control"  id="lname" name="lname" value="{{ lname }}" placeholder="Enter your last name">
+      </div>
+    </div>
     <div class="mb-3">
      <h5 for="email" class="form-label">Email</h5>
-     <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+     <input type="email" class="form-control" id="email" name="email" value="{{ email }}" placeholder="name@example.com">
      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
     </div>
     <div class="mb-3">
      <h5 for="pass1" class="form-label">Password</h5>
      <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Choose Your Password">
-     <i class="ri-eye-fill" id="togglePassword" onclick="pass1()"></i>
+     <i class="ri-eye-fill" id="togglePassword1" onclick="pass1()"></i>
     </div>
     <div class="mb-3">
      <h5 for="pass2" class="form-label">Confirm Password</h5>
      <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Enter your password again">
-     <i class="ri-eye-fill" id="togglePassword" onclick="pass2()"></i>
+     <i class="ri-eye-fill" id="togglePassword2" onclick="pass2()"></i>
     </div>
     <div class="text-end">
      <button type="submit" class="btn btn-danger">Submit</button>

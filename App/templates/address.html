@@ -32,7 +32,8 @@
              <p>Email: {{p.email}}</p>
              <p>Mobile Number: {{p.phone}}</p>
              <p>Gender: {{p.gender}}</p>
-             <a href="/address/remove/{{p.id}}" class="btn btn-danger mr-3 px-4">Delete</a>
+             <a href="javascript:void(0);" onclick="confirmDelete({{ p.id }})" class="btn btn-danger mr-3 px-4">Delete</a>
+             <a href="edit/{{p.id}}" class="btn btn-warning ms-1 px-4">Update</a>
             </div>
         </div>
     </div>
@@ -41,5 +42,21 @@
   </div>
  </div>
 </div>
-
+<script>
+    function confirmDelete(addressId) {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#28a745",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/address/remove/" + addressId;
+            }
+        });
+    }
+</script>
 {% endblock main-content %}

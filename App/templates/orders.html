@@ -41,7 +41,7 @@
               <label class="text-primary">Customer Name: </label>
               <span class="my-2 mx-2">{{p.customer.name}}</span>
               <br>
-              <div><a style="text-decoration:none;" href="download-invoice/{{p.id}}" ><button class="btn btn-warning btn-sm mt-2">Download Invoice</button></a></div>
+              <div><a style="text-decoration:none;" href="javascript:void(0);" onclick="confirmDownload({{ p.id }})"><button class="btn btn-warning btn-sm mt-2">Download Invoice</button></a></div>
           </div>
       </div>
         {% if p.status == 'Accepted' %}
@@ -77,4 +77,32 @@
   </div>
  </div>
 </div>
+<script>
+  function confirmDownload(Id) {
+      Swal.fire({
+          title: "Download Invoice",
+          text: "Are you sure you want to download the invoice?",
+          icon: "question",
+          showCancelButton: true,
+          confirmButtonColor: "#28a745",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, download it!"
+      }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.href = "download-invoice/" + Id;
+            const SwalWithStyle  = Swal.mixin({
+              customClass: {
+                  confirmButton: "px-4 btn btn-primary",
+              },
+              buttonsStyling: false
+            });
+            SwalWithStyle.fire({
+            title:"Download Success!",
+            text:"", 
+            icon:"success",
+            });
+          }
+      });
+  }
+</script>
 {% endblock main-content %}
