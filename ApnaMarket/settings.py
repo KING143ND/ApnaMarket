@@ -97,10 +97,10 @@ DATABASES = {
     #========================== Postgresql databse ==========================
     'default': {
        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-       'NAME': 'ApnaMarketDB',
-       'USER': 'naveen',
-       'PASSWORD': 'king143nd',
-       'HOST': 'localhost',
+       'NAME': 'bgxqsbpd',
+       'USER': 'bgxqsbpd',
+       'PASSWORD': '7ml0jmGXKRCirS73MVNICTnmNw9XWS_9',
+       'HOST': 'floppy.db.elephantsql.com',
        'PORT': '5432',
     }
 }
