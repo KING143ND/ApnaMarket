@@ -14,11 +14,11 @@
                     <h3>Showing {{search_prod|length}} results found for "{{query}}"</h3>
                     {% for p in search_prod %}
                     <div class="row"><hr>
-                        <a href="/product-detail/{{p.title}}" class="col-md-3 text-center align-self-center"><div style="height: 180px; width: auto; position: relative;
+                        <a href="/product-detail/{{p.id}}" class="col-md-3 text-center align-self-center"><div style="height: 180px; width: auto; position: relative;
                         margin: 0 auto;"><img src="{{p.product_image.url}}" alt="" class="img-fluid p-img"></div></a>
                         <div class="col-md-9">
                             <div>
-                                <a class="heading" href="/product-detail/{{p.title}}"><h5>{{p.title}}</h5></a>                              
+                                <a class="heading" href="/product-detail/{{p.id}}"><h5>{{p.title}}</h5></a>                              
                                 <div class="my-2">
                                     <label class="text-primary">Description: </label>
                                     {% if p.description|length > 250 %}

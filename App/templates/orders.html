@@ -18,14 +18,14 @@
   <div class="col-md-9">
     {% for p in op %}
     <div class="row shadow-md mb-3">
-        <a href="/product-detail/{{p.product.title}}" class="col-md-4 text-center align-self-center">
+        <a href="/product-detail/{{p.product.id}}" class="col-md-4 text-center align-self-center">
           <div style="height: 180px; width: aut; position: relative;
                         margin: 0 auto;"><img src="{{p.product.product_image.url}}" alt="" class="img-fluid p-img"></div>
         </a>
      <div class="col-md-7">
       <div class="">
         <div>
-          <a class="heading" href="/product-detail/{{p.product.title}}"><h5 class="mt-2">{{p.product.title}}</h5></a>                              
+          <a class="heading" href="/product-detail/{{p.product.id}}"><h5 class="mt-2">{{p.product.title}}</h5></a>                              
           <div class="my-2 fs-6">
               <label class="text-primary">Product Price: </label>
               <span class="my-2 mx-2">₹{{p.product.discounted_price}}</span>

@@ -14,13 +14,13 @@
                     <h3>Cart</h3>
                     {% for p in products %}
                     <div class="row"><hr>
-                        <a href="/product-detail/{{p.product.title}}" class="col-md-3 text-center align-self-center">
+                        <a href="/product-detail/{{p.product.id}}" class="col-md-3 text-center align-self-center">
                             <div style="height: 180px; width: auto; position: relative;
                         margin: 0 auto;"><img src="{{p.product.product_image.url}}" alt="" class="img-fluid p-img"></div>
                          </a>
                         <div class="col-md-9">
                             <div>
-                                <a class="heading" href="/product-detail/{{p.product.title}}"><h5>{{p.product.title}}</h5></a>                              
+                                <a class="heading" href="/product-detail/{{p.product.id}}"><h5>{{p.product.title}}</h5></a>                              
                                 <div class="my-1">
                                     <label class="text-primary">Description: </label>
                                     {% if p.product.description|length > 175 %}

@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-pvlhv$dbbmnrygf(b5=zr1q6_y83vry^r-5jz+#4^t7dbwxwl%
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = os.getenv('DJANGO_DEBUG')
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -90,19 +90,19 @@ WSGI_APPLICATION = 'ApnaMarket.wsgi.application'
 
 DATABASES = {
     #========================== Sqlite3 database ==========================
-    #  'default': {
-    #      'ENGINE': 'django.db.backends.sqlite3',
-    #      'NAME': BASE_DIR / 'db.sqlite3',
-    #  }
+     'default': {
+         'ENGINE': 'django.db.backends.sqlite3',
+         'NAME': BASE_DIR / 'db.sqlite3',
+     }
     #========================== Postgresql databse ==========================
-    'default': {
-       'ENGINE': 'django.db.backends.postgresql_psycopg2',
-       'NAME': 'bgxqsbpd',
-       'USER': 'bgxqsbpd',
-       'PASSWORD': '7ml0jmGXKRCirS73MVNICTnmNw9XWS_9',
-       'HOST': 'floppy.db.elephantsql.com',
-       'PORT': '5432',
-    }
+    # 'default': {
+    #    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #    'NAME': 'bgxqsbpd',
+    #    'USER': 'bgxqsbpd',
+    #    'PASSWORD': '7ml0jmGXKRCirS73MVNICTnmNw9XWS_9',
+    #    'HOST': 'floppy.db.elephantsql.com',
+    #    'PORT': '5432',
+    # }
 }
 
 

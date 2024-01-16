@@ -11,16 +11,16 @@
     <div class="card mb-2">
       <div class="card-body">
         <div class="row">
-          <a href="/product-detail/{{p.product.title}}" class="col-md-4 text-center align-self-center">
+          <a href="/product-detail/{{p.product.id}}" class="col-md-4 text-center align-self-center">
             <div style="height: 180px; width: auto; position: relative;
                         margin: 0 auto;"><img src="{{p.product.product_image.url}}" alt="" class="img-fluid p-img"></div>
            </a>
           <div class="col-md-8 my-3">
             <div>
                 {% if p.product.title|length > 40 %}
-                <a class="heading" href="/product-detail/{{p.product.title}}"><h5>{{p.product.title|slice:"0:40"}}...</h5></a>                              
+                <a class="heading" href="/product-detail/{{p.product.id}}"><h5>{{p.product.title|slice:"0:40"}}...</h5></a>                              
                 {% else  %}
-                <a class="heading" href="/product-detail/{{p.product.title}}"><h5>{{p.product.title}}</h5></a>                              
+                <a class="heading" href="/product-detail/{{p.product.id}}"><h5>{{p.product.title}}</h5></a>                              
                 {% endif %}
                 <div class="fs-6">
                     <label class="text-primary">Delivery Time: </label>

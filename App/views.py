@@ -43,14 +43,14 @@ def home(request):
     return render(request, 'home.html',{'products':products,'mobiles':mobiles,'laptops':laptops,'electronics':electronics,'mfashion':mfashion,'wfashion':wfashion,'grocery':grocery,'home':home,'toys':toys,'medicine':medicine,'fashion':fashion,'product_count_in_cart':product_count_in_cart})
 
 
-def product_detail(request,title):
+def product_detail(request,pk):
     if request.user.is_authenticated:
         product_count_in_cart=len(Cart.objects.filter(user=request.user))
         cart_product_ids = Cart.objects.filter(user=request.user).values_list('product__id', flat=True)
     else:
         product_count_in_cart=0
         cart_product_ids = []
-    products=Product.objects.filter(title = title)
+    products=Product.objects.filter(pk = pk)
     index_prod = {'products':products,'product_count_in_cart':product_count_in_cart,'cart_product_ids':cart_product_ids}
     return render(request, 'productdetail.html', index_prod)
 
