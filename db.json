@@ -7176,6 +7176,58 @@
         }
     },
     {
+        "model": "admin.logentry",
+        "pk": 553,
+        "fields": {
+            "action_time": "2024-01-16T10:01:33.645Z",
+            "user": 1,
+            "content_type": 9,
+            "object_id": "14",
+            "object_repr": "Satyamjha1234",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Status\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 554,
+        "fields": {
+            "action_time": "2024-01-16T10:02:29.276Z",
+            "user": 1,
+            "content_type": 9,
+            "object_id": "14",
+            "object_repr": "Satyamjha1234",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Status\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 555,
+        "fields": {
+            "action_time": "2024-01-16T10:04:16.698Z",
+            "user": 1,
+            "content_type": 9,
+            "object_id": "14",
+            "object_repr": "Satyamjha1234",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Status\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 556,
+        "fields": {
+            "action_time": "2024-01-16T10:06:34.307Z",
+            "user": 1,
+            "content_type": 9,
+            "object_id": "14",
+            "object_repr": "Satyamjha1234",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Status\"]}}]"
+        }
+    },
+    {
         "model": "auth.permission",
         "pk": 1,
         "fields": {
@@ -7613,6 +7665,10 @@
         "fields": {
             "name": "Staff",
             "permissions": [
+                1,
+                2,
+                3,
+                4,
                 37,
                 38,
                 39,
@@ -7637,10 +7693,6 @@
                 30,
                 31,
                 32,
-                1,
-                2,
-                3,
-                4,
                 9,
                 10,
                 11,
@@ -7668,8 +7720,8 @@
         "model": "auth.user",
         "pk": 1,
         "fields": {
-            "password": "pbkdf2_sha256$260000$jEhsg1s3EPJBAmGN7zgSYG$rRhnbhF8LXWOODCXgECeHe7ctS/0LiTCPQSSIHUGqdg=",
-            "last_login": "2024-01-05T13:18:41.219Z",
+            "password": "pbkdf2_sha256$260000$LRWEQzX2mZYeZfsqHLVCaS$yLSjWaHcmhrWu5K4OY0aKnYMRZ4rNT5qSDaABNmwZNM=",
+            "last_login": "2024-01-16T13:31:17.778Z",
             "is_superuser": true,
             "username": "Naveen",
             "first_name": "Naveen",
@@ -7771,6 +7823,60 @@
             "is_staff": false,
             "is_active": true,
             "date_joined": "2024-01-04T17:57:15.733Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 8,
+        "fields": {
+            "password": "pbkdf2_sha256$260000$8Ef6jFYG5RsmpGrwjjkz5J$P0nnNLthbYfNOqWL/yQ4tXHyosbCKmlC1MP+d5C6rhA=",
+            "last_login": "2024-01-16T09:45:24.495Z",
+            "is_superuser": false,
+            "username": "Satyamjha",
+            "first_name": "Satyam",
+            "last_name": "Jha",
+            "email": "satyamjha9132@gmail.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-01-16T09:45:22.789Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 9,
+        "fields": {
+            "password": "pbkdf2_sha256$260000$s4ZsEWLJKau9oHr9yClgwl$IsmQeluG8QkoEV8oEsxVFivJS0pJ6QDqisaLPb12KFk=",
+            "last_login": "2024-01-16T09:48:30.236Z",
+            "is_superuser": false,
+            "username": "Satyamjha1234",
+            "first_name": "Satyam",
+            "last_name": "Jha",
+            "email": "naveenchoudary123@gmail.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-01-16T09:48:28.534Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 10,
+        "fields": {
+            "password": "pbkdf2_sha256$260000$4NynFI3UWSXXC8JyOsYNAH$Uv/zZUb/w44bexo7m9QGZOB0mWj3JLwiC3caCTXiYrQ=",
+            "last_login": "2024-01-16T09:49:47.517Z",
+            "is_superuser": false,
+            "username": "Doraemon",
+            "first_name": "Doraemon",
+            "last_name": "Robot",
+            "email": "dora@mon.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-01-16T09:49:45.821Z",
             "groups": [],
             "user_permissions": []
         }
@@ -7889,6 +7995,14 @@
     },
     {
         "model": "sessions.session",
+        "pk": "0uwk9dcnqk2pndgbzg2rlhn9uvny34yb",
+        "fields": {
+            "session_data": ".eJxVjMEOwiAQRP-FsyGFAks9eu83kGVZpGpoUtqT8d9tkx70Npn3Zt4i4LaWsDVewpTEVShx-e0i0pPrAdID632WNNd1maI8FHnSJsc58et2un8HBVvZ10Y5ctwplXlINoPNA3mnAbUFimySoey1B-xszwhG97BnRI_KRJOy-HwB4YU4BQ:1rPjKZ:v9SA5gX2f56mt7w0vyWoY0DtcVNXvTUJTSCxAYK8QSs",
+            "expire_date": "2024-01-30T13:18:15.304Z"
+        }
+    },
+    {
+        "model": "sessions.session",
         "pk": "186eoscnb9ulb346wqxey2o7qxnoqr8u",
         "fields": {
             "session_data": ".eJxVjEEOwiAQRe_C2hAGrMy4dO8ZyDBQqRpISrsy3l2bdKHb_977LxV4XUpYe57DlNRZgTr8bpHlkesG0p3rrWlpdZmnqDdF77Tra0v5edndv4PCvXxrY8UgojiEKJlJJAqhJUw80jFCJDBsDIx28A7EUUaXTiRovKPBevX-AONCN0s:1rKGTv:9jYIquEHPaUJGWkR6ACS2og7N4HE200eZo7vQvSmQQs",
@@ -7905,10 +8019,26 @@
     },
     {
         "model": "sessions.session",
+        "pk": "1cv27ehvups3d2uczur5v779m2cq82o9",
+        "fields": {
+            "session_data": ".eJxVjMEOwiAQRP-FsyFAK7AevfsNZHcBqRpISnsy_rtt0oMeZ96beYuA61LC2tMcpiguQovTb0fIz1R3EB9Y701yq8s8kdwVedAuby2m1_Vw_w4K9rKtRwvssh-cQlC4haiMZ20GSA7ZJ7ZIRKiz0dZEAgB7Hj1nlxyhARafL-NAOEQ:1rLhs4:n20XvOnwRM7tOSB7iotNIASe1hPBVGpTmb1y1ddcTwE",
+            "expire_date": "2024-01-19T10:56:12.245Z"
+        }
+    },
+    {
+        "model": "sessions.session",
         "pk": "2wb9jpmth8c60kumv3uruoedbqz85d7f",
         "fields": {
             "session_data": ".eJxVjEEOwiAQRe_C2pBahs7UpfuegTAwSNWUpLQr492VpAvd_vf-eynn9y27vcrq5qgu6qxOvxv78JClgXj3y63oUJZtnVk3RR-06qlEeV4P9y-Qfc0ty0xDGsByMAiBCK0QyUiYeuzGbiARMBgpGfDYG0AO34dYjgkiWPX-ANKJN6Q:1pzEks:PUAtDSkroOVT7ACKh4pKiwegaFVB_CSaGoruQBca4Xo",
             "expire_date": "2023-05-31T10:51:38.193Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "3m9oxj6e1k0awadu3e1q9affjoxtmb3u",
+        "fields": {
+            "session_data": ".eJxVjEEOwiAQRe_C2hAGrMy4dO8ZyDBQqRpISrsy3l2bdKHb_977LxV4XUpYe57DlNRZgTr8bpHlkesG0p3rrWlpdZmnqDdF77Tra0v5edndv4PCvXxrY8UgojiEKJlJJAqhJUw80jFCJDBsDIx28A7EUUaXTiRovKPBevX-AONCN0s:1rPg8V:7t1SQSjrqeYVTCiB5Xx1GvgAOFKtexZjlQp_hFH1e7s",
+            "expire_date": "2024-01-30T09:53:35.479Z"
         }
     },
     {
@@ -7949,6 +8079,14 @@
         "fields": {
             "session_data": ".eJxVjMEOwiAQRP-FsyFAK7AevfsNZHcBqRpISnsy_rtt0oMeZ96beYuA61LC2tMcpiguQovTb0fIz1R3EB9Y701yq8s8kdwVedAuby2m1_Vw_w4K9rKtRwvssh-cQlC4haiMZ20GSA7ZJ7ZIRKiz0dZEAgB7Hj1nlxyhARafL-NAOEQ:1rDLP0:-VP5WAmIsU1Yo6seshms86HR82d1K92xvCEs-dlVlVQ",
             "expire_date": "2023-12-27T09:19:38.804Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "a3wzyln1wuz14sgo11eciczgmdnhwh71",
+        "fields": {
+            "session_data": ".eJxVjMEOwiAQRP-FsyGFAks9eu83kGVZpGpoUtqT8d9tkx70Npn3Zt4i4LaWsDVewpTEVShx-e0i0pPrAdID632WNNd1maI8FHnSJsc58et2un8HBVvZ10Y5ctwplXlINoPNA3mnAbUFimySoey1B-xszwhG97BnRI_KRJOy-HwB4YU4BQ:1rPjXC:N76WFZMkhgZ53SRGzpy7Ni-1kOJHRMFg9Hldf6yE4sw",
+            "expire_date": "2024-01-30T13:31:18.120Z"
         }
     },
     {
@@ -8009,10 +8147,10 @@
     },
     {
         "model": "sessions.session",
-        "pk": "hk170oyi3r8n8onkcrvhmy9tqdpgqd6o",
+        "pk": "gq3wd867o7xdcd3dkn99w5vgj1qz23x9",
         "fields": {
-            "session_data": ".eJxVjEEOwiAQRe_C2hAGrMy4dO8ZyDBQqRpISrsy3l2bdKHb_977LxV4XUpYe57DlNRZgTr8bpHlkesG0p3rrWlpdZmnqDdF77Tra0v5edndv4PCvXxrY8UgojiEKJlJJAqhJUw80jFCJDBsDIx28A7EUUaXTiRovKPBevX-AONCN0s:1rLk5x:IRRNxhzR-EkbWRPC62QNfGiWswegHqhDg3TmykxGWVc",
-            "expire_date": "2024-01-19T13:18:41.233Z"
+            "session_data": ".eJxVjDsOwjAQBe_iGln-JTaU9DmDtbte4wCypTipEHeHSCmgfTPzXiLCtpa4dV7inMRFnMXpd0OgB9cdpDvUW5PU6rrMKHdFHrTLqSV-Xg_376BAL99aBbbegGYcFTJ6RaMdgtLodPIukx7IZvQEEAwY5xK7pFX2bCAHyiDeH-ygOKo:1rPg3a:TzXIMpHo3uBQEfNkajrPPf937lFL8cGbg0SYcpfd2O8",
+            "expire_date": "2024-01-30T09:48:30.406Z"
         }
     },
     {
@@ -8025,10 +8163,42 @@
     },
     {
         "model": "sessions.session",
+        "pk": "iju8eou9rx6h6qce3prlorxeceswttw1",
+        "fields": {
+            "session_data": ".eJxVjMEOwiAQRP-FsyFAK7AevfsNZHcBqRpISnsy_rtt0oMeZ96beYuA61LC2tMcpiguQovTb0fIz1R3EB9Y701yq8s8kdwVedAuby2m1_Vw_w4K9rKtRwvssh-cQlC4haiMZ20GSA7ZJ7ZIRKiz0dZEAgB7Hj1nlxyhARafL-NAOEQ:1rLh2j:jxtnIQjBdvUW6pGKFREznf6hHewgdc88HCV_OS99aaI",
+            "expire_date": "2024-01-19T10:03:09.267Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "jbiq4vkh31ewzjo3mgme3cqsfp0pjvnd",
+        "fields": {
+            "session_data": ".eJxVjMEOwiAQRP-FsyGFAks9eu83kGVZpGpoUtqT8d9tkx70Npn3Zt4i4LaWsDVewpTEVShx-e0i0pPrAdID632WNNd1maI8FHnSJsc58et2un8HBVvZ10Y5ctwplXlINoPNA3mnAbUFimySoey1B-xszwhG97BnRI_KRJOy-HwB4YU4BQ:1rPibC:FFNcSeLnTZ4kZe5gLXf3hKIwUJZ1A_UaxEREtlMBKvo",
+            "expire_date": "2024-01-30T12:31:22.181Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "lkh1taefi5mraqfj8nrfm2yujgss4pmq",
+        "fields": {
+            "session_data": ".eJxVjMEOwiAQRP-FsyFAK7AevfsNZHcBqRpISnsy_rtt0oMeZ96beYuA61LC2tMcpiguQovTb0fIz1R3EB9Y701yq8s8kdwVedAuby2m1_Vw_w4K9rKtRwvssh-cQlC4haiMZ20GSA7ZJ7ZIRKiz0dZEAgB7Hj1nlxyhARafL-NAOEQ:1rLj8D:1dAaoN0ezKsWcV_UyIKZYkt43KgCkYwm6vjX08-9Eug",
+            "expire_date": "2024-01-19T12:16:57.296Z"
+        }
+    },
+    {
+        "model": "sessions.session",
         "pk": "nuyj0nmxlm5fp6s20cs5xehcg66wxx2w",
         "fields": {
             "session_data": ".eJxVjEEOwiAQRe_C2hAYoFiX7j0DAWZGqgaS0q6Md7dNutDtf-_9twhxXUpYO81hQnERIE6_W4r5SXUH-Ij13mRudZmnJHdFHrTLW0N6XQ_376DEXrb6rFzSnAEzKaCkBuDRRw9snLKcHbFNODhABIPWj95oozMjMSbcOvH5AvdoOOk:1r9M00:C62YjUmM7rRakQJGwTbFumE9vMNEhGM1aW_bMlPxBP0",
             "expire_date": "2023-12-16T09:09:20.656Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "o42bf8unebiquu6mljpsuz72isicum7c",
+        "fields": {
+            "session_data": ".eJxVjMEOwiAQRP-FsyFAK7AevfsNZHcBqRpISnsy_rtt0oMeZ96beYuA61LC2tMcpiguQovTb0fIz1R3EB9Y701yq8s8kdwVedAuby2m1_Vw_w4K9rKtRwvssh-cQlC4haiMZ20GSA7ZJ7ZIRKiz0dZEAgB7Hj1nlxyhARafL-NAOEQ:1rLhtD:ybFTxZmwVvOe2hVy491gZyh09CNyuBTBOhP3N5-4xGU",
+            "expire_date": "2024-01-19T10:57:23.784Z"
         }
     },
     {
@@ -8061,6 +8231,14 @@
         "fields": {
             "session_data": ".eJxVjMEOwiAQRP-FsyFAK7AevfsNZHcBqRpISnsy_rtt0oMeZ96beYuA61LC2tMcpiguQovTb0fIz1R3EB9Y701yq8s8kdwVedAuby2m1_Vw_w4K9rKtRwvssh-cQlC4haiMZ20GSA7ZJ7ZIRKiz0dZEAgB7Hj1nlxyhARafL-NAOEQ:1r8KUt:QGUEBX-gZ78TM6bOMyazaLOG2_zl1kDyVJgC3qyAoMk",
             "expire_date": "2023-12-13T13:20:59.775Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "qmhqa4j43p3pvzrnvjem3t8ic34izugs",
+        "fields": {
+            "session_data": ".eJxVjEEOwiAQRe_C2hAGrMy4dO8ZyDBQqRpISrsy3l2bdKHb_977LxV4XUpYe57DlNRZgTr8bpHlkesG0p3rrWlpdZmnqDdF77Tra0v5edndv4PCvXxrY8UgojiEKJlJJAqhJUw80jFCJDBsDIx28A7EUUaXTiRovKPBevX-AONCN0s:1rLm49:JnnJoc8ez_E3-NSKebXqFcx6NHLVp82k-PPJ5GaABK0",
+            "expire_date": "2024-01-19T15:24:57.464Z"
         }
     },
     {
@@ -8121,6 +8299,22 @@
     },
     {
         "model": "sessions.session",
+        "pk": "w40b516asld1wndjytrkcou6tu3i6h2p",
+        "fields": {
+            "session_data": ".eJxVjMEOwiAQRP-FsyGFAks9eu83kGVZpGpoUtqT8d9tkx70Npn3Zt4i4LaWsDVewpTEVShx-e0i0pPrAdID632WNNd1maI8FHnSJsc58et2un8HBVvZ10Y5ctwplXlINoPNA3mnAbUFimySoey1B-xszwhG97BnRI_KRJOy-HwB4YU4BQ:1rPgs0:Mlskx4WMEoKyMsy4I5IDFaNt6pwlcjYOJkSPer_642E",
+            "expire_date": "2024-01-30T10:40:36.256Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "wua99q7nmp9xioq01hzxw3vx1eh1xnai",
+        "fields": {
+            "session_data": ".eJxVjEEOwiAQRe_C2pAwlHFw6d4zkAEGqRqalHbVeHdt0oVu_3vvbyrwutSwdpnDmNVFkTr9bpHTU9oO8oPbfdJpass8Rr0r-qBd36Ysr-vh_h1U7vVbcyR05InYo5jkMgueLdhkfCwcMQEIem_YAmeigdhlJCApQwEorN4f60o4JA:1rPg0a:P6Z1eM90OyCcBW1fpKFXDdBCO816xd7jQJUdZJG9sOo",
+            "expire_date": "2024-01-30T09:45:24.676Z"
+        }
+    },
+    {
+        "model": "sessions.session",
         "pk": "xhertx63qfwdn50ji1k1iruzqy7i5tr1",
         "fields": {
             "session_data": ".eJxVjMEOwiAQRP-FsyFAK7AevfsNZHcBqRpISnsy_rtt0oMeZ96beYuA61LC2tMcpiguQovTb0fIz1R3EB9Y701yq8s8kdwVedAuby2m1_Vw_w4K9rKtRwvssh-cQlC4haiMZ20GSA7ZJ7ZIRKiz0dZEAgB7Hj1nlxyhARafL-NAOEQ:1r7g24:_M7ZN_1vXAS7guY7ZvoRPz68p2Cacc3-qpwjTxJMdH4",
@@ -8149,7 +8343,7 @@
             "zipcode": 453441,
             "state": "Madhya Pradesh",
             "landmark": "Near Panchmukhi Hanuman Mandir",
-            "age": 24,
+            "age": 25,
             "address": "Home"
         }
     },
@@ -8187,6 +8381,42 @@
             "landmark": "Near Earth",
             "age": 20,
             "address": "Home"
+        }
+    },
+    {
+        "model": "App.customer",
+        "pk": 22,
+        "fields": {
+            "user": 10,
+            "name": "Doraemon",
+            "email": "dora@mon.com",
+            "phone": "7999898000",
+            "locality": "Japan",
+            "gender": "Not Specified",
+            "city": "Indore",
+            "zipcode": 453441,
+            "state": "Madhya Pradesh",
+            "landmark": "",
+            "age": 30,
+            "address": "Home"
+        }
+    },
+    {
+        "model": "App.customer",
+        "pk": 23,
+        "fields": {
+            "user": 9,
+            "name": "Satyam Jha",
+            "email": "naveenchoudary1234@gmail.com",
+            "phone": "0000011111",
+            "locality": "Lahore,  Pakistan",
+            "gender": "Female",
+            "city": "Lahore",
+            "zipcode": 345467,
+            "state": "Jammu and Kashmir",
+            "landmark": "",
+            "age": 18,
+            "address": "Work"
         }
     },
     {
@@ -12842,6 +13072,34 @@
             "quantity": 1,
             "ordered_date": "2024-01-04T16:24:50.170Z",
             "order_id": "OD20240104ID215450",
+            "status": "Delivered"
+        }
+    },
+    {
+        "model": "App.orderplaced",
+        "pk": 13,
+        "fields": {
+            "user": 10,
+            "customer": 22,
+            "product": 110,
+            "shipping": 99,
+            "quantity": 1,
+            "ordered_date": "2024-01-16T09:52:25.343Z",
+            "order_id": "OD20240116ID152225",
+            "status": "Pending"
+        }
+    },
+    {
+        "model": "App.orderplaced",
+        "pk": 14,
+        "fields": {
+            "user": 9,
+            "customer": 23,
+            "product": 32,
+            "shipping": 0,
+            "quantity": 1,
+            "ordered_date": "2024-01-16T09:57:30.717Z",
+            "order_id": "OD20240116ID152730",
             "status": "Delivered"
         }
     },

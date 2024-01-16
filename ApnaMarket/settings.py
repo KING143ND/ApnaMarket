@@ -93,15 +93,17 @@ DATABASES = {
     #  'default': {
     #      'ENGINE': 'django.db.backends.sqlite3',
     #      'NAME': BASE_DIR / 'db.sqlite3',
+         
     #  }
     #========================== Postgresql databse ==========================
     'default': {
        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-       'NAME': 'bgxqsbpd',
-       'USER': 'bgxqsbpd',
-       'PASSWORD': '7ml0jmGXKRCirS73MVNICTnmNw9XWS_9',
-       'HOST': 'floppy.db.elephantsql.com',
+       'NAME': 'postgres',
+       'USER': 'postgres',
+       'PASSWORD': 'Ndnaveen@143',
+       'HOST': 'db.qlmyzeqsebhbbzpjxlmz.supabase.co',
        'PORT': '5432',
+       'CONN_MAX_AGE': 900,
     }
 }
 
