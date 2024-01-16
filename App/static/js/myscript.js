@@ -31,28 +31,43 @@ function next() {
     document.getElementById('slider-container').scrollLeft += 270;
 }
 
-function loginpassword() {
-    var password = document.getElementById("loginpassword");
+// function loginpassword() {
+//     var password = document.getElementById("loginpassword");
+//     if (password.type === "password") {
+//         password.type = "text";
+//     } else {
+//         password.type = "password";
+//     }
+// }
+
+const loginpassword = () => {
+    let password = document.getElementById("loginpassword");
+    let eyeIcon = document.getElementById("togglePassword");
+
     if (password.type === "password") {
         password.type = "text";
+        eyeIcon.classList.remove("ri-eye-fill");
+        eyeIcon.classList.add("ri-eye-off-fill");
     } else {
         password.type = "password";
+        eyeIcon.classList.remove("ri-eye-off-fill");
+        eyeIcon.classList.add("ri-eye-fill");
     }
-}
-
+};
 const pass1 = () => {
-    let password = document.getElementById("password");
+    let password = document.getElementById("pass1");
     let eyeIcon = document.getElementById("togglePassword1");
+
     if (password.type === "password") {
-      password.type = "text";
-      eyeIcon.classList.remove("ri-eye-fill");
-      eyeIcon.classList.add("ri-eye-off-fill");
+        password.type = "text";
+        eyeIcon.classList.remove("ri-eye-fill");
+        eyeIcon.classList.add("ri-eye-off-fill");
     } else {
-      password.type = "password";
-      eyeIcon.classList.remove("ri-eye-off-fill");
-    eyeIcon.classList.add("ri-eye-fill");
+        password.type = "password";
+        eyeIcon.classList.remove("ri-eye-off-fill");
+        eyeIcon.classList.add("ri-eye-fill");
     }
-  }
+};
 
   const pass2 = () => {
     let password = document.getElementById("pass2");
