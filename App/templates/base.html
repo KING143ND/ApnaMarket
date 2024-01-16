@@ -236,6 +236,18 @@
     <script src="{% static 'js/owl.carousel.min.js' %}"></script>
     <script src="{% static 'js/all.min.js' %}"></script>
     <script src="{% static 'js/myscript.js' %}"></script>
-</body>
+    <!-- Add this script to your base template or the specific template where you want to implement this deterrent -->
+<script>
+    document.addEventListener('contextmenu', function (e) {
+        e.preventDefault();
+    });
 
+    document.onkeydown = function (e) {
+        if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+            return false;
+        }
+    };
+</script>
+
+</body>
 </html>

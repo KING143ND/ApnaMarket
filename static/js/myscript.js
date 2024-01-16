@@ -40,23 +40,34 @@ function loginpassword() {
     }
 }
 
-function pass1() {
-    var password = document.getElementById("pass1");
+const pass1 = () => {
+    let password = document.getElementById("password");
+    let eyeIcon = document.getElementById("togglePassword1");
     if (password.type === "password") {
-        password.type = "text";
+      password.type = "text";
+      eyeIcon.classList.remove("ri-eye-fill");
+      eyeIcon.classList.add("ri-eye-off-fill");
     } else {
-        password.type = "password";
+      password.type = "password";
+      eyeIcon.classList.remove("ri-eye-off-fill");
+    eyeIcon.classList.add("ri-eye-fill");
     }
-}
+  }
 
-function pass2() {
-    var password = document.getElementById("pass2");
+  const pass2 = () => {
+    let password = document.getElementById("pass2");
+    let eyeIcon = document.getElementById("togglePassword2");
+
     if (password.type === "password") {
         password.type = "text";
+        eyeIcon.classList.remove("ri-eye-fill");
+        eyeIcon.classList.add("ri-eye-off-fill");
     } else {
         password.type = "password";
+        eyeIcon.classList.remove("ri-eye-off-fill");
+        eyeIcon.classList.add("ri-eye-fill");
     }
-}
+};
 
 const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
 const appendAlert = (message, type) => {
