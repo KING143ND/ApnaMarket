@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-pvlhv$dbbmnrygf(b5=zr1q6_y83vry^r-5jz+#4^t7dbwxwl%
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = os.getenv('DJANGO_DEBUG')
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -98,13 +98,22 @@ DATABASES = {
     #========================== Postgresql databse ==========================
     'default': {
        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-       'NAME': 'postgres',
-       'USER': 'postgres',
-       'PASSWORD': 'Ndnaveen@143',
-       'HOST': 'db.qlmyzeqsebhbbzpjxlmz.supabase.co',
-       'PORT': '5432',
+       'NAME': 'defaultdb',
+       'USER': 'avnadmin',
+       'PASSWORD': 'AVNS_IjEmIGEIAGbrO5yobNT',
+       'HOST': 'apnamarket-apnamarket.a.aivencloud.com',
+       'PORT': '11040',
        'CONN_MAX_AGE': 900,
     }
+    # 'default': {
+    #    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #    'NAME': 'postgres',
+    #    'USER': 'postgres',
+    #    'PASSWORD': 'Ndnaveen@143',
+    #    'HOST': 'db.qlmyzeqsebhbbzpjxlmz.supabase.co',
+    #    'PORT': '5432',
+    #    'CONN_MAX_AGE': 900,
+    # }
 }
 
 
