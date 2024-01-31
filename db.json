@@ -7228,6 +7228,71 @@
         }
     },
     {
+        "model": "admin.logentry",
+        "pk": 557,
+        "fields": {
+            "action_time": "2024-01-16T20:03:15.340Z",
+            "user": 1,
+            "content_type": 8,
+            "object_id": "163",
+            "object_repr": "Cadbury Oreo Biscuit Vanilla Flavour Cream Sandwich  (43.75 g)",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Title\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 558,
+        "fields": {
+            "action_time": "2024-01-18T09:48:43.719Z",
+            "user": 1,
+            "content_type": 9,
+            "object_id": "16",
+            "object_repr": "Vishal123",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Status\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 559,
+        "fields": {
+            "action_time": "2024-01-18T09:49:03.483Z",
+            "user": 1,
+            "content_type": 9,
+            "object_id": "16",
+            "object_repr": "Vishal123",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Status\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 560,
+        "fields": {
+            "action_time": "2024-01-18T09:49:24.117Z",
+            "user": 1,
+            "content_type": 9,
+            "object_id": "16",
+            "object_repr": "Vishal123",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Status\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 561,
+        "fields": {
+            "action_time": "2024-01-18T09:49:59.004Z",
+            "user": 1,
+            "content_type": 9,
+            "object_id": "16",
+            "object_repr": "Vishal123",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Status\"]}}]"
+        }
+    },
+    {
         "model": "auth.permission",
         "pk": 1,
         "fields": {
@@ -7665,10 +7730,6 @@
         "fields": {
             "name": "Staff",
             "permissions": [
-                1,
-                2,
-                3,
-                4,
                 37,
                 38,
                 39,
@@ -7693,6 +7754,10 @@
                 30,
                 31,
                 32,
+                1,
+                2,
+                3,
+                4,
                 9,
                 10,
                 11,
@@ -7721,7 +7786,7 @@
         "pk": 1,
         "fields": {
             "password": "pbkdf2_sha256$260000$LRWEQzX2mZYeZfsqHLVCaS$yLSjWaHcmhrWu5K4OY0aKnYMRZ4rNT5qSDaABNmwZNM=",
-            "last_login": "2024-01-16T13:31:17.778Z",
+            "last_login": "2024-01-16T20:02:13.535Z",
             "is_superuser": true,
             "username": "Naveen",
             "first_name": "Naveen",
@@ -7882,6 +7947,24 @@
         }
     },
     {
+        "model": "auth.user",
+        "pk": 11,
+        "fields": {
+            "password": "pbkdf2_sha256$260000$Evpx288TdhHdtvtdbmDJyS$yGyEaVdVT/iPVidztp7R9G3HAOyyld9zqxey+DwGWNo=",
+            "last_login": "2024-01-18T09:37:19.014Z",
+            "is_superuser": false,
+            "username": "Vishal123",
+            "first_name": "Vishal",
+            "last_name": "Rathore",
+            "email": "v.p.srathore700@gmail.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-01-18T09:37:18.458Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
         "model": "contenttypes.contenttype",
         "pk": 1,
         "fields": {
@@ -8015,6 +8098,14 @@
         "fields": {
             "session_data": ".eJxVjLsOAiEURP-F2hAuy0Ms7f0GAveCrBpIlt3K-O8uyRY6xRRzTubNfNjW4reeFj8TuzBgp98tBnymOgA9Qr03jq2uyxz5UPhBO781Sq_r4f4dlNDLuJ2yE1ZLl89RSBJRa5tCngwaIGOtUTrtvQedhBwdGYiAiiBnhdKxzxfEtzdZ:1qHLYf:Sk6PMvQgiIi6yds5eYS9n8KxT5CCAT0sM-yfbc-zHOk",
             "expire_date": "2023-07-20T09:45:53.078Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "1aih1eteh5127vo851b1ntk3cvpgzgzl",
+        "fields": {
+            "session_data": ".eJxVjMEOwiAQRP-FsyGFAks9eu83kGVZpGpoUtqT8d9tkx70Npn3Zt4i4LaWsDVewpTEVShx-e0i0pPrAdID632WNNd1maI8FHnSJsc58et2un8HBVvZ10Y5ctwplXlINoPNA3mnAbUFimySoey1B-xszwhG97BnRI_KRJOy-HwB4YU4BQ:1rPpdV:czuh14HxgV3PxEW_8CXMpabCuwQDJ0IJl2NrsN2tRpU",
+            "expire_date": "2024-01-30T20:02:13.552Z"
         }
     },
     {
@@ -8211,6 +8302,14 @@
     },
     {
         "model": "sessions.session",
+        "pk": "p07agus2n571j3a70ba5y5jx6nqt8ba6",
+        "fields": {
+            "session_data": ".eJxVjMEOwiAQRP-FsyGFAks9eu83kGVZpGpoUtqT8d9tkx70Npn3Zt4i4LaWsDVewpTEVShx-e0i0pPrAdID632WNNd1maI8FHnSJsc58et2un8HBVvZ10Y5ctwplXlINoPNA3mnAbUFimySoey1B-xszwhG97BnRI_KRJOy-HwB4YU4BQ:1rPkWH:DBZqiHCy50JYKJE8tounq-CU-ZkVUNfJ-XWRdz3Ll6U",
+            "expire_date": "2024-01-30T14:34:25.376Z"
+        }
+    },
+    {
+        "model": "sessions.session",
         "pk": "q1z9e5md6ggs9ll1fou900xiz6eudzt4",
         "fields": {
             "session_data": ".eJxVjMEOwiAQRP-FsyFAK7AevfsNZHcBqRpISnsy_rtt0oMeZ96beYuA61LC2tMcpiguQovTb0fIz1R3EB9Y701yq8s8kdwVedAuby2m1_Vw_w4K9rKtRwvssh-cQlC4haiMZ20GSA7ZJ7ZIRKiz0dZEAgB7Hj1nlxyhARafL-NAOEQ:1r5rPv:g2gCmYmDrHlWnMshmJNhkABtdbeP5FS_Jdk_m3SRqjg",
@@ -8323,6 +8422,14 @@
     },
     {
         "model": "sessions.session",
+        "pk": "yax6h0d3406oklvn2tg7dezjw2m672oo",
+        "fields": {
+            "session_data": ".eJxVjMsOwiAQRf-FtSEDLY9x6d5vIMNApWogKe3K-O_apAvd3nPOfYlA21rC1vMS5iTOQilx-h0j8SPXnaQ71VuT3Oq6zFHuijxol9eW8vNyuH8HhXr51kAITrtR46DQe20wg0ngDQ12RGvAW5g4IWekyKiJtHeGPYGjyTCJ9wfHDjdS:1rQOpr:3o8HTDqJjQnAXV6bXKXUqoEvE2I-f4aLWn5CcN092HU",
+            "expire_date": "2024-02-01T09:37:19.028Z"
+        }
+    },
+    {
+        "model": "sessions.session",
         "pk": "z7i7zm7fokz8syl5b7hzxbfdg5jjjepf",
         "fields": {
             "session_data": ".eJxVjMEOwiAQRP-FsyFAK7AevfsNZHcBqRpISnsy_rtt0oMeZ96beYuA61LC2tMcpiguQovTb0fIz1R3EB9Y701yq8s8kdwVedAuby2m1_Vw_w4K9rKtRwvssh-cQlC4haiMZ20GSA7ZJ7ZIRKiz0dZEAgB7Hj1nlxyhARafL-NAOEQ:1r9Ljh:R5BZ8EIjggUzLuT8kLL-Xm22tCewkl5Ykux1EYsaz4I",
@@ -8417,6 +8524,24 @@
             "landmark": "",
             "age": 18,
             "address": "Work"
+        }
+    },
+    {
+        "model": "App.customer",
+        "pk": 24,
+        "fields": {
+            "user": 11,
+            "name": "Vishal",
+            "email": "v.p.srathoree05@gamil.com",
+            "phone": "91092537",
+            "locality": "16A Rajendra Nagar",
+            "gender": "",
+            "city": "Indore",
+            "zipcode": 452012,
+            "state": "Madhya Pradesh",
+            "landmark": "Tanki Hall",
+            "age": 30,
+            "address": "Home"
         }
     },
     {
@@ -11678,7 +11803,7 @@
         "model": "App.product",
         "pk": 163,
         "fields": {
-            "title": "Cadbury Oreo Oreo Biscuit Vanilla Flavour Cream Sandwich  (43.75 g)",
+            "title": "Cadbury Oreo Biscuit Vanilla Flavour Cream Sandwich  (43.75 g)",
             "quantity": 0,
             "selling_price": 10,
             "discounted_price": 9,
@@ -12922,6 +13047,16 @@
         }
     },
     {
+        "model": "App.cart",
+        "pk": 30,
+        "fields": {
+            "user": 1,
+            "product": 163,
+            "coupon": null,
+            "quantity": 4
+        }
+    },
+    {
         "model": "App.orderplaced",
         "pk": 1,
         "fields": {
@@ -13100,6 +13235,34 @@
             "quantity": 1,
             "ordered_date": "2024-01-16T09:57:30.717Z",
             "order_id": "OD20240116ID152730",
+            "status": "Delivered"
+        }
+    },
+    {
+        "model": "App.orderplaced",
+        "pk": 15,
+        "fields": {
+            "user": 1,
+            "customer": 17,
+            "product": 164,
+            "shipping": 99,
+            "quantity": 3,
+            "ordered_date": "2024-01-16T16:12:45.063Z",
+            "order_id": "OD20240116ID214245",
+            "status": "Pending"
+        }
+    },
+    {
+        "model": "App.orderplaced",
+        "pk": 16,
+        "fields": {
+            "user": 11,
+            "customer": 24,
+            "product": 13,
+            "shipping": 25,
+            "quantity": 1,
+            "ordered_date": "2024-01-18T09:46:10.401Z",
+            "order_id": "OD20240118ID151610",
             "status": "Delivered"
         }
     },
