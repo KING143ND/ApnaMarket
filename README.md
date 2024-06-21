@@ -7,7 +7,7 @@ Welcome to ApnaMarket! This project is an online marketplace where you can explo
 
 ## Live Demo
 
-Explore the live demo of ApnaMarket: [ApnaMarket Live](https://apnamarket.site/)
+Explore the live demo of ApnaMarket: [ApnaMarket Live](https://apnamarket143.vercel.app/)
 
 Feel free to check out the live project and experience these functionalities in action!
 
